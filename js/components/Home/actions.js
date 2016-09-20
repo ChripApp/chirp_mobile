@@ -5,5 +5,5 @@
 
 // Action creators
 export const register = () => {
-  console.log('Skeleton')
+  console.log('Home')
 }

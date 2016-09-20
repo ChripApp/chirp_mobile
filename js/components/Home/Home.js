@@ -5,18 +5,17 @@ import {
   View,
 } from 'react-native'
 
-export default class Register extends Component {
+export default class Home extends Component {
   constructor() {
     super();
   }
 
   render() {
 
-
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text>
-          This is Register page
+          This is Home page
         </Text>
       </View>
     )

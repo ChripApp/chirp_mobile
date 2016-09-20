@@ -1,1 +1,4 @@
-actionTypes.js
+//Login
+export const ON_LOGGING = 'ON_LOGGING'
+export const UPDATE_USERNAME = 'UPDATE_USERNAME'
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
