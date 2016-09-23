@@ -1,13 +1,14 @@
 // @flow
 import React, { Component } from 'react'
-import InputNormal from '../../elements/InputNormal'
 import { Actions } from 'react-native-router-flux'
-import jquery from 'jquery'
 import {
   Text,
+  TextInput,
   View,
   TouchableHighlight,
 } from 'react-native'
+
+import InputNormal from '../../elements/InputNormal'
 
 export default class Register extends Component {
   constructor() {
@@ -35,7 +36,7 @@ export default class Register extends Component {
       format = format + ')';
     else if(text.length == 9)
       format = format.substring(0, 8) + '-' + format.substring(8, 9);
-    
+
     this.props.updatePhoneNumber(format)
   }
 
@@ -52,7 +53,7 @@ export default class Register extends Component {
   }
 
   _register() {
-      if(this.props.phoneNumber.length >= 13 && this.props.firstName != undefined 
+      if(this.props.phoneNumber.length >= 13 && this.props.firstName != undefined
         && this.props.lastName != undefined && this.props.password != undefined){
         fetch('http://localhost:8080/user/signup', {
           method: 'POST',
@@ -80,15 +81,19 @@ export default class Register extends Component {
 
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>
-          This is Register page
-        </Text>
-         <InputNormal
-            placeholder='Phone Number'
-            type='number'
-            onChangeText={this._handleCurrentPhoneNumber}
-            value={this.props.phoneNumber}
-          />
+        <TextInput placeholder='hi there'/>
+        <InputNormal
+          placeholder='Phone Number'
+          type='number'
+          onChangeText={this._handleCurrentPhoneNumber}
+          value={this.props.phoneNumber}
+        />
+        <TextInput
+          style={{fontWeight: 'bold', height: 20.5, color: '#999999'}}
+          placeholderStyle={{fontWeight: 'bold'}}
+          placeholderTextColor='#999999'
+          placeholder='hi there'
+        />
         <InputNormal
             placeholder='First Name'
             onChangeText={this._handleCurrentFirstName}

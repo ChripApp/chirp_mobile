@@ -25,7 +25,6 @@ class InputNormal extends Component {
         placeholderTextColor='#999999'
         placeholder={pr.placeholder}
         onChangeText={pr.onChangeText}
-        keyboardType={pr.type == 'number' ? 'numeric' : 'default'}
         value={value}
         keyboardType={pr.keyboardType ? pr.keyboardType : "default"}
       />

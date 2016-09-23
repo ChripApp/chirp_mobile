@@ -7,21 +7,20 @@ import configureStore from './store/configureStore'
 import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
-import Store from './components/Store'
 
 const RouterWithRedux = connect()(Router)
 const store = configureStore()
 
 export default class App extends Component {
+
   render() {
     return (
       <Provider store={store}>
         <RouterWithRedux>
           <Scene key='root'>
-            <Scene initial={true} key='login' component={Login} title='Login Page'/>
-            <Scene key='register' component={Register} title='Register'/>
-            <Scene key='home' component={Home} title='Home'/>
-            <Scene key='store' component={Store} title='Store'/>
+            <Scene component={Login} initial={true} hideNavBar key='login' sceneStyle={{backgroundColor: '#986B6C'}} title='Login Page'/>
+            <Scene component={Register} hideNavBar={false} key='register' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#986B6C'}}/>
+            <Scene component={Home} direction='vertical' key='home' sceneStyle={{backgroundColor: '#986B6C'}} title='Home' type='reset'/>
           </Scene>
         </RouterWithRedux>
       </Provider>
