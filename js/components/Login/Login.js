@@ -8,6 +8,8 @@ import {
 import { Actions } from 'react-native-router-flux'
 
 import InputNormal from '../../elements/InputNormal'
+// import Style from '../../../public/assets/style/global'
+// style={Style.text1}
 
 export default class Login extends Component {
   constructor() {
