@@ -7,6 +7,7 @@ const DEFAULT_STATE = {
 
 export default function(state = DEFAULT_STATE, action) {
   switch(action.type) {
+    
     case actionTypes.ON_LOGGING:
       return {
         ...state,
