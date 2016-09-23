@@ -12,37 +12,41 @@ import InputNormal from '../../elements/InputNormal'
 export default class Login extends Component {
   constructor() {
     super();
-
-    this._handleCurrentUsername = this._handleCurrentUsername.bind(this);
+    this._handleCurrentPhoneNumber = this._handleCurrentPhoneNumber.bind(this);
     this._handleCurrentPassword = this._handleCurrentPassword.bind(this);
+    this._login = this._login.bind(this);
   }
 
-  _handleCurrentUsername(text) {
-    this.props.updateUsername(text)
+  _handleCurrentPhoneNumber(text) {
+    this.props.updatePhoneNumber(text)
   }
 
   _handleCurrentPassword(text) {
     this.props.updatePassword(text)
   }
 
+  _login(){
+    this.props.login(this.props.phoneNumber, this.props.password)
+  }
+
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text>
-          {this.props.username}
+          {this.props.phoneNumber}
           {this.props.password}
         </Text>
         <InputNormal
-          placeholder='Username'
-          onChangeText={this._handleCurrentUsername}
-          value={this.props.username}
+          placeholder='Phone Number'
+          onChangeText={this._handleCurrentPhoneNumber}
+          value={this.props.phoneNumber}
         />
         <InputNormal
           placeholder='Password'
           onChangeText={this._handleCurrentPassword}
           value={this.props.password}
         />
-        <TouchableHighlight onPress={Actions.home}>
+        <TouchableHighlight onPress={this._login}>
           <Text style={{color: '#999999', fontSize: 17.2}}>
             Login
           </Text>
