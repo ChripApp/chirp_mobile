@@ -29,32 +29,38 @@ export const login = (phoneNumber, password) => {
   .catch((error) => {
     console.error(error);
   });
-  
+
   return {type: actionTypes.ON_LOGGING}
 }
-export const autoLogin = (token) => {
-  fetch('http://localhost:8080/user/autoSignin', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-  body: JSON.stringify({
-    token: token
-   })}).then((response) => response.json())
-  .then((responseJson) => {
-    //Login Success
-    if(responseJson.success){
-      console.log(responseJson.token);
-      AsyncStorage.setItem('token', responseJson.token);
-      Actions.home()
-    }
 
-   })
-  .catch((error) => {
-    console.error(error);
-  });
-  return {type: actionTypes.ON_LOGGING}
+export const autoLogin = (token) => {
+  return dispatch => {
+    fetch('http://localhost:8080/user/autoSignin',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({token: token})
+      }
+    )
+    .then((response) => response.json())
+    .then((responseJson) => {
+      //Login Success
+      if(responseJson.success){
+        console.log(responseJson.token);
+        AsyncStorage.setItem('token', responseJson.token);
+        Actions.home()
+        dispatch({type: actionTypes.LOGIN_SUCCESS})
+      }
+     }
+    )
+    .catch((error) => {
+      console.error(error);
+    });
+    dispatch({type: actionTypes.ON_LOGGING})
+  }
 }
 export const loginWithDelay = () => {
   return (dispatch, getState) => {

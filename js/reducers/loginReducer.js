@@ -7,7 +7,7 @@ const DEFAULT_STATE = {
 
 export default function(state = DEFAULT_STATE, action) {
   switch(action.type) {
-    
+
     case actionTypes.ON_LOGGING:
       return {
         ...state,
@@ -26,6 +26,12 @@ export default function(state = DEFAULT_STATE, action) {
         password: action.password
       }
 
+    case actionTypes.LOGIN_SUCCESS:
+      return {
+        ...state,
+        loginSuccess: true
+      }
+
     default:
       return state
   }
@@ -35,4 +41,5 @@ export const getLogin = (state) => ({
   onLogging: state.onLogging,
   phoneNumber: state.phoneNumber,
   password: state.password,
+  loginSuccess: state.loginSuccess,
 })
