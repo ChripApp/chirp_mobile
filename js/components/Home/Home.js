@@ -58,7 +58,7 @@ export default class Home extends Component {
           enableEmptySections={true}
           renderRow={(rowData) => 
             <TouchableHighlight 
-              onPress={Actions.login}
+              onPress={Actions.store}
               >
               <Text>{rowData.name}</Text>
             </TouchableHighlight>}

@@ -7,6 +7,7 @@ import configureStore from './store/configureStore'
 import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
+import Store from './components/Store'
 
 const RouterWithRedux = connect()(Router)
 const store = configureStore()
@@ -20,6 +21,7 @@ export default class App extends Component {
             <Scene initial={true} key='login' component={Login} title='Login Page'/>
             <Scene key='register' component={Register} title='Register'/>
             <Scene key='home' component={Home} title='Home'/>
+            <Scene key='store' component={Store} title='Store'/>
           </Scene>
         </RouterWithRedux>
       </Provider>
