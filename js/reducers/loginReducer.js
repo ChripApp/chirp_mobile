@@ -32,6 +32,18 @@ export default function(state = DEFAULT_STATE, action) {
         loginSuccess: true
       }
 
+    case actionTypes.UPDATE_USER:
+      return {
+        ...state,
+        user: action.user
+      }
+
+    case actionTypes.UPDATE_STORE:
+      return {
+        ...state,
+        store: action.store
+      }
+
     default:
       return state
   }
@@ -42,4 +54,6 @@ export const getLogin = (state) => ({
   phoneNumber: state.phoneNumber,
   password: state.password,
   loginSuccess: state.loginSuccess,
+  user: state.user,
+  store: state.store,
 })

@@ -8,6 +8,12 @@ import {
 
 // Action creators
 export const login = (phoneNumber, password) => {
+  
+  var phoneNumber = phoneNumber.match(/\d/g);
+  phoneNumber = phoneNumber.join("");
+  phoneNumber = '+1' + phoneNumber;
+
+  return dispatch => {
   fetch('http://localhost:8080/user/signin', {
     method: 'POST',
     headers: {
@@ -21,8 +27,11 @@ export const login = (phoneNumber, password) => {
   .then((responseJson) => {
     //Login Success
     if(responseJson.success){
-      console.log(responseJson.token);
       AsyncStorage.setItem('token', responseJson.token);
+      Actions.home()
+      dispatch({type: actionTypes.LOGIN_SUCCESS})
+      dispatch({user: responseJson.user , type: actionTypes.UPDATE_USER})
+      dispatch({store: responseJson.store , type: actionTypes.UPDATE_STORE})
     }
 
    })
@@ -30,7 +39,8 @@ export const login = (phoneNumber, password) => {
     console.error(error);
   });
 
-  return {type: actionTypes.ON_LOGGING}
+  dispatch({type: actionTypes.ON_LOGGING})
+  }
 }
 
 export const autoLogin = (token) => {
@@ -53,6 +63,8 @@ export const autoLogin = (token) => {
         AsyncStorage.setItem('token', responseJson.token);
         Actions.home()
         dispatch({type: actionTypes.LOGIN_SUCCESS})
+        dispatch({user: responseJson.user , type: actionTypes.UPDATE_USER})
+        dispatch({store: responseJson.store , type: actionTypes.UPDATE_STORE})
       }
      }
     )

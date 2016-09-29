@@ -18,6 +18,7 @@ export default class Register extends Component {
     this._handleCurrentFirstName = this._handleCurrentFirstName.bind(this);
     this._handleCurrentLastName = this._handleCurrentLastName.bind(this);
     this._handleCurrentPassword = this._handleCurrentPassword.bind(this);
+    this._handleCurrentStoreName = this._handleCurrentStoreName.bind(this);
 
     this._register = this._register.bind(this);
   }
@@ -52,27 +53,14 @@ export default class Register extends Component {
     this.props.updatePassword(text)
   }
 
+  _handleCurrentStoreName(text) {
+    this.props.updateStoreName(text)
+  }
+
   _register() {
       if(this.props.phoneNumber.length >= 13 && this.props.firstName != undefined
         && this.props.lastName != undefined && this.props.password != undefined){
-        fetch('http://localhost:8080/user/signup', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            phoneNumber: this.props.phoneNumber,
-            firstName: this.props.firstName,
-            lastName: this.props.lastName,
-            password: this.props.password,
-          })}).then((response) => response.json())
-          .then((responseJson) => {
-            console.log(responseJson);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        this.props.register(this.props.phoneNumber, this.props.firstName, this.props.lastName, this.props.password, this.props.storeName)
       }
   }
 
@@ -87,12 +75,6 @@ export default class Register extends Component {
           type='number'
           onChangeText={this._handleCurrentPhoneNumber}
           value={this.props.phoneNumber}
-        />
-        <TextInput
-          style={{fontWeight: 'bold', height: 20.5, color: '#999999'}}
-          placeholderStyle={{fontWeight: 'bold'}}
-          placeholderTextColor='#999999'
-          placeholder='hi there'
         />
         <InputNormal
             placeholder='First Name'
@@ -109,6 +91,12 @@ export default class Register extends Component {
             onChangeText={this._handleCurrentPassword}
             value={this.props.password}
           />
+        <InputNormal
+            placeholder='Store Name'
+            onChangeText={this._handleCurrentStoreName}
+            value={this.props.storeName}
+          />
+     
         <TouchableHighlight onPress={this._register}>
           <Text style={{color: '#999999', fontSize: 17.2}}>
             Register

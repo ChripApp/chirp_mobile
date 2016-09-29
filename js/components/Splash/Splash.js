@@ -15,8 +15,9 @@ export default class Splash extends Component {
     super();
     AsyncStorage.getItem('token', (err, result) => {
     	if(result){
-    		Actions.home();
-        	this.props.autoLogin(result);
+       Actions.login();
+    		// Actions.home();
+      //   this.props.autoLogin(result);
     	}else if(err || !result){
     		Actions.login();
     	}
