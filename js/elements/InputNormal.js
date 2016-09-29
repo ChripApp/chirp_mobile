@@ -8,7 +8,7 @@ import {
 
 class InputNormal extends Component {
   static propTypes = {
-    style: React.PropTypes.object,
+    style: React.PropTypes.any,
     placeholder: React.PropTypes.string,
     onChangeText: React.PropTypes.func,
   }
@@ -20,7 +20,7 @@ class InputNormal extends Component {
 
     return (
       <TextInput
-        style={{fontWeight: 'bold', height: 20.5, color: '#999999'}}
+        style={[{fontWeight: 'bold', height: 20.5, color: '#999999'}, style]}
         placeholderStyle={{fontWeight: 'bold'}}
         placeholderTextColor='#999999'
         placeholder={pr.placeholder}

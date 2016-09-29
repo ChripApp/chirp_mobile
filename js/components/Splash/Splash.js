@@ -21,7 +21,7 @@ export default class Splash extends Component {
     	}else if(err || !result){
     		Actions.login();
     	}
-    	
+
     });
   }
 

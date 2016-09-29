@@ -96,7 +96,7 @@ export default class Register extends Component {
             onChangeText={this._handleCurrentStoreName}
             value={this.props.storeName}
           />
-     
+
         <TouchableHighlight onPress={this._register}>
           <Text style={{color: '#999999', fontSize: 17.2}}>
             Register

@@ -8,7 +8,7 @@ import {
 
 // Action creators
 export const login = (phoneNumber, password) => {
-  
+
   var phoneNumber = phoneNumber.match(/\d/g);
   phoneNumber = phoneNumber.join("");
   phoneNumber = '+1' + phoneNumber;
@@ -26,6 +26,7 @@ export const login = (phoneNumber, password) => {
    })}).then((response) => response.json())
   .then((responseJson) => {
     //Login Success
+
     if(responseJson.success){
       AsyncStorage.setItem('token', responseJson.token);
       Actions.home()
