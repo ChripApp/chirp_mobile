@@ -51,7 +51,8 @@ export default class Home extends Component {
     super();
 
     this._handleCurrentPhoneNumber = this._handleCurrentPhoneNumber.bind(this);
-    this._handleCurrentSeats = this._handleCurrentSeats.bind(this);
+    this._decrementSeats = this._decrementSeats.bind(this);
+    this._incrementSeats = this._incrementSeats.bind(this);
     this._handleNewCustomer = this._handleNewCustomer.bind(this);
     this._handleRemoveCustomer = this._handleRemoveCustomer.bind(this);
     this._refreshing = this._refreshing.bind(this);
@@ -63,7 +64,7 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
-    this.props.homeSeats = 1;
+    this.props.updateHomeSeats(1);
     updating = setInterval(this._refreshing, 10000);
   }
 
@@ -81,9 +82,16 @@ export default class Home extends Component {
     this.props.updateHomePhoneNumber(text)
   }
 
-  _handleCurrentSeats(text) {
-    console.log(text);
-    this.props.updateHomeSeats(text)
+   _decrementSeats() {
+    if(this.props.homeSeats > 0){
+      this.props.updateHomeSeats(parseInt(this.props.homeSeats) - 1)
+    }  
+  }
+
+  _incrementSeats() {
+    if(this.props.homeSeats < 15){
+     this.props.updateHomeSeats(parseInt(this.props.homeSeats) + 1)
+    }
   }
 
   _handleNewCustomer() {
@@ -117,25 +125,19 @@ export default class Home extends Component {
               onChangeText={this._handleCurrentPhoneNumber}
               value={this.props.homePhoneNumber}
             />
-            <Picker
-              selectedValue={this.props.homeSeats}
-              onValueChange={this._handleCurrentSeats}>
-              <Picker.Item label="1" value="1" />
-              <Picker.Item label="2" value="2" />
-              <Picker.Item label="3" value="3" />
-              <Picker.Item label="4" value="4" />
-              <Picker.Item label="5" value="5" />
-              <Picker.Item label="6" value="6" />
-              <Picker.Item label="7" value="7" />
-              <Picker.Item label="8" value="8" />
-              <Picker.Item label="9" value="9" />
-              <Picker.Item label="10" value="10" />
-              <Picker.Item label="11" value="11" />
-              <Picker.Item label="12" value="12" />
-              <Picker.Item label="13" value="13" />
-              <Picker.Item label="14" value="14" />
-              <Picker.Item label="15" value="15" />
-            </Picker>
+            <TouchableHighlight onPress={this._decrementSeats}>
+              <Text style={{color: '#999999', fontSize: 17.2}}>
+                Decrement
+              </Text>
+            </TouchableHighlight>
+            <Text>
+                { this.props.homeSeats }
+            </Text>
+            <TouchableHighlight onPress={this._incrementSeats}>
+              <Text style={{color: '#999999', fontSize: 17.2}}>
+                Increment
+              </Text>
+            </TouchableHighlight>
             <TouchableHighlight onPress={this._handleNewCustomer}>
               <Text style={{color: '#999999', fontSize: 17.2}}>
                 Register

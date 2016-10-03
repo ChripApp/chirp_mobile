@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native'
+
 import { Actions } from 'react-native-router-flux'
 
 import InputNormal from '../../elements/InputNormal'
@@ -25,6 +26,9 @@ export default class Login extends Component {
     this._login = this._login.bind(this);
   }
 
+  async componentDidMount(){
+  }
+
   _handleCurrentPhoneNumber(text) {
     this.props.updatePhoneNumber(text)
   }
@@ -38,6 +42,7 @@ export default class Login extends Component {
   }
 
   render() {
+    console.log("logo");
     return (
       <View style={{flex: 1}}>
       {/*<Text>
@@ -89,6 +94,8 @@ export default class Login extends Component {
   }
 }
 
+
+
 const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: 'rgba(255,255,255,0.1)',
@@ -122,10 +129,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: 'rgba(255,255,255,0.1)',
-    width: 270,
     height: 45,
+    padding: 15,
     fontFamily: 'Helvetica Neue',
     fontSize: 14,
     textAlign: 'center',
+    marginLeft: 15,
+    marginRight: 15,
   },
 });
