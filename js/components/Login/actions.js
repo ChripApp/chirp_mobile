@@ -26,7 +26,7 @@ export const login = (phoneNumber, password) => {
    })}).then((response) => response.json())
   .then((responseJson) => {
     //Login Success
-
+    console.log(responseJson);
     if(responseJson.success){
       AsyncStorage.setItem('token', responseJson.token);
       Actions.main()
@@ -37,7 +37,7 @@ export const login = (phoneNumber, password) => {
 
    })
   .catch((error) => {
-    console.error(error);
+    console.log("here");
   });
 
   dispatch({type: actionTypes.ON_LOGGING})

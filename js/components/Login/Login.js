@@ -42,7 +42,6 @@ export default class Login extends Component {
   }
 
   render() {
-    console.log("logo");
     return (
       <View style={{flex: 1, padding: 45}}>
       {/*<Text>
