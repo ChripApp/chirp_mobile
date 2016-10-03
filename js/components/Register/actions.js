@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 // Action creators
 export const register = (phoneNumber, firstName, lastName, password, storeName) => {
-  
+
   var phoneNumber = phoneNumber.match(/\d/g);
   phoneNumber = phoneNumber.join("");
   phoneNumber = '+1' + phoneNumber;
@@ -29,7 +29,7 @@ export const register = (phoneNumber, firstName, lastName, password, storeName) 
     .then((responseJson) => {
       if(responseJson.success){
         AsyncStorage.setItem('token', responseJson.token);
-        Actions.home()
+        Actions.main()
         dispatch({type: actionTypes.LOGIN_SUCCESS})
         dispatch({user: responseJson.user , type: actionTypes.UPDATE_USER})
         dispatch({store: responseJson.store , type: actionTypes.UPDATE_STORE})

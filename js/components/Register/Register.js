@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { Actions } from 'react-native-router-flux'
 import {
+  StyleSheet,
   Text,
   TextInput,
   View,
@@ -68,41 +69,95 @@ export default class Register extends Component {
 
 
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <TextInput placeholder='hi there'/>
-        <InputNormal
-          placeholder='Phone Number'
-          type='number'
+      <View style={{alignItems: 'center', flex: 1, justifyContent: 'center', padding: 45}}>
+
+        <TextInput
+          style={[styles.transInput, {marginBottom: 15}]}
+          placeholderTextColor='rgba(255,255,255,0.18)'
+          placeholder='PHONE #'
           onChangeText={this._handleCurrentPhoneNumber}
           value={this.props.phoneNumber}
+          keyboardType='phone-pad'
         />
-        <InputNormal
-            placeholder='First Name'
-            onChangeText={this._handleCurrentFirstName}
-            value={this.props.firstName}
-          />
-        <InputNormal
-            placeholder='Last Name'
-            onChangeText={this._handleCurrentLastName}
-            value={this.props.lastName}
-          />
-        <InputNormal
-            placeholder='Password'
-            onChangeText={this._handleCurrentPassword}
-            value={this.props.password}
-          />
-        <InputNormal
+
+        <TextInput
+          style={[styles.transInput, {marginBottom: 15}]}
+          placeholderTextColor='rgba(255,255,255,0.18)'
+          placeholder='FIRST NAME'
+          onChangeText={this._handleCurrentFirstName}
+          value={this.props.firstName}
+        />
+
+        <TextInput
+          style={[styles.transInput, {marginBottom: 15}]}
+          placeholderTextColor='rgba(255,255,255,0.18)'
+          placeholder='LAST NAME'
+          onChangeText={this._handleCurrentLastName}
+          value={this.props.lastName}
+        />
+
+        <TextInput
+          style={[styles.transInput, {marginBottom: 15}]}
+          placeholderTextColor='rgba(255,255,255,0.18)'
+          placeholder='PASSWORD'
+          onChangeText={this._handleCurrentPassword}
+          value={this.props.password}
+        />
+
+        {/*<InputNormal
             placeholder='Store Name'
             onChangeText={this._handleCurrentStoreName}
             value={this.props.storeName}
-          />
+          />*/}
 
-        <TouchableHighlight onPress={this._register}>
-          <Text style={{color: '#999999', fontSize: 17.2}}>
-            Register
-          </Text>
-        </TouchableHighlight>
+        <View style={{height: 45, flexDirection: 'row'}}>
+          <View style={{flex: 1}}>
+            <TouchableHighlight
+              onPress={this._register}
+              style={styles.buttonContainer}
+              underlayColor='transparent'
+            >
+              <Text style={styles.buttonText}>
+                SUBMIT
+              </Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    backgroundColor: 'rgba(255,255,255,0.18)',
+    borderWidth: 0,
+    // borderColor: 'rgba(255,255,255,0.2)',
+    borderColor: 'black',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    flex: 1,
+  },
+  buttonText: {
+    // color: 'rgba(255,255,255,0.2)',
+    color: '#986B6C',
+    fontSize: 13,
+    fontFamily: 'Helvetica Neue',
+    fontWeight: 'bold',
+  },
+  transInput: {
+    // backgroundColor: 'rgba(255,255,255,0.1)',
+    borderWidth: 1,
+    borderRadius: 25,
+    borderColor: 'rgba(255,255,255,0.18)',
+    height: 45,
+    padding: 15,
+    fontFamily: 'Helvetica Neue',
+    fontSize: 13,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+})

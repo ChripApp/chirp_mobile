@@ -44,12 +44,12 @@ export default class Login extends Component {
   render() {
     console.log("logo");
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, padding: 45}}>
       {/*<Text>
           {this.props.phoneNumber}
           {this.props.password}
         </Text> */}
-        <View style={{flex: 2, justifyContent: 'flex-end', alignItems: 'center'}}>
+        <View style={{flex: 1.5, justifyContent: 'flex-end', alignItems: 'center'}}>
           <Image
             source={require('../../../public/assets/img/chirplogo.png')}
             style={styles.chirpImg}
@@ -57,63 +57,73 @@ export default class Login extends Component {
           {/*<Text style={styles.chirpText}>Chirp</Text>*/}
           <TextInput
             style={[styles.transInput, {marginBottom: 15}]}
-            placeholderTextColor='rgba(255,255,255,0.15)'
-            placeholder='Enter Phone #'
+            placeholderTextColor='rgba(255,255,255,0.18)'
+            placeholder='ENTER PHONE #'
             onChangeText={this._handleCurrentPhoneNumber}
             value={this.props.phoneNumber}
             keyboardType='phone-pad'
           />
           <TextInput
             style={styles.transInput}
-            placeholderTextColor='rgba(255,255,255,0.15)'
-            placeholder='Enter Password'
+            placeholderTextColor='rgba(255,255,255,0.18)'
+            placeholder='ENTER PASSWORD'
             onChangeText={this._handleCurrentPassword}
             value={this.props.password}
           />
         </View>
-        <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <TouchableHighlight
-            onPress={this._login}
-            style={styles.buttonContainer}
-          >
-            <Text style={styles.buttonText}>
-              Login
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={Actions.register}
-            style={styles.buttonContainer}
-          >
-            <Text style={styles.buttonText}>
-              Register
-            </Text>
-          </TouchableHighlight>
+
+        <View style={{flex: 1, justifyContent: 'flex-end'}}>
+          <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
+            <View style={{flex: 1}}>
+              <TouchableHighlight
+                onPress={this._login}
+                style={styles.buttonContainer}
+                underlayColor='transparent'
+              >
+                <Text style={styles.buttonText}>
+                  LOGIN
+                </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+
+          <View style={{height: 45, flexDirection: 'row'}}>
+            <View style={{flex: 1}}>
+              <TouchableHighlight
+                onPress={Actions.register}
+                style={styles.buttonContainer}
+                underlayColor='transparent'
+              >
+                <Text style={styles.buttonText}>
+                  REGISTER
+                </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
         </View>
       </View>
     )
   }
 }
 
-
-
 const styles = StyleSheet.create({
   buttonContainer: {
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(255,255,255,0.18)',
     borderWidth: 0,
     // borderColor: 'rgba(255,255,255,0.2)',
     borderColor: 'black',
-    borderRadius: 0,
-    height: 45,
-    width: width,
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    flex: 1,
   },
   buttonText: {
     // color: 'rgba(255,255,255,0.2)',
-    color: 'rgba(255,255,255,0.15)',
-    fontSize: 14,
+    color: '#986B6C',
+    fontSize: 13,
     fontFamily: 'Helvetica Neue',
+    fontWeight: 'bold',
   },
   chirpText: {
     color: 'black',
@@ -121,20 +131,19 @@ const styles = StyleSheet.create({
   },
   chirpImg: {
     height: 62.5,
-    marginBottom: 90,
+    marginBottom: 35,
     width: 85,
   },
   transInput: {
     // backgroundColor: 'rgba(255,255,255,0.1)',
     borderWidth: 1,
-    borderRadius: 10,
-    borderColor: 'rgba(255,255,255,0.1)',
+    borderRadius: 25,
+    borderColor: 'rgba(255,255,255,0.18)',
     height: 45,
     padding: 15,
     fontFamily: 'Helvetica Neue',
-    fontSize: 14,
+    fontSize: 13,
     textAlign: 'center',
-    marginLeft: 15,
-    marginRight: 15,
+    fontWeight: 'bold',
   },
-});
+})
