@@ -13,17 +13,25 @@ export const login = (phoneNumber, password) => {
   phoneNumber = phoneNumber.join("");
   phoneNumber = '+1' + phoneNumber;
 
-  return dispatch => {
-  fetch('http://localhost:8080/user/signin', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-  body: JSON.stringify({
+  var requestHeader = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  }
+
+  var requestBody = {
     phoneNumber: phoneNumber,
     password: password,
-   })}).then((response) => response.json())
+   }
+
+   var request = {
+     method: 'POST',
+     headers: requestHeader,
+     body: JSON.stringify(requestBody)
+   }
+
+  return dispatch => {
+  fetch('http://localhost:8080/user/signin', request)
+  .then((response) => response.json())
   .then((responseJson) => {
     //Login Success
     console.log(responseJson);
@@ -31,14 +39,19 @@ export const login = (phoneNumber, password) => {
       AsyncStorage.setItem('token', responseJson.token);
       Actions.main()
       dispatch({type: actionTypes.LOGIN_SUCCESS})
-      dispatch({user: responseJson.user , type: actionTypes.UPDATE_USER})
-      dispatch({store: responseJson.store , type: actionTypes.UPDATE_STORE})
+      dispatch({
+        user: responseJson.user,
+        type: actionTypes.UPDATE_USER
+      })
+      dispatch({
+        store: responseJson.store,
+        type: actionTypes.UPDATE_STORE
+      })
     }
-
-   })
+  })
   .catch((error) => {
-    console.log("here");
-  });
+    console.log('__________' + error)
+  })
 
   dispatch({type: actionTypes.ON_LOGGING})
   }
