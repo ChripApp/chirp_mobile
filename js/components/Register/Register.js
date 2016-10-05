@@ -61,7 +61,7 @@ export default class Register extends Component {
   _register() {
       if(this.props.phoneNumber.length >= 13 && this.props.firstName != undefined
         && this.props.lastName != undefined && this.props.password != undefined){
-        this.props.register(this.props.phoneNumber, this.props.firstName, this.props.lastName, this.props.password, this.props.storeName)
+        this.props.register(this.props.phoneNumber, this.props.firstName, this.props.lastName, this.props.password)
       }
   }
 

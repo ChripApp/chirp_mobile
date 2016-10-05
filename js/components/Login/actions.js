@@ -4,9 +4,20 @@ import { getLogin } from '../../reducers/rootReducer'
 import { Actions } from 'react-native-router-flux'
 import {
   AsyncStorage,
+  Alert,
 } from 'react-native'
 
-// Action creators
+
+function okAlert(title, content) {
+  Alert.alert(
+    title,
+    content,
+    [
+      {text: 'OK', onPress: () => console.log('OK Pressed!')},
+    ]
+  );
+}
+
 export const login = (phoneNumber, password) => {
 
   var phoneNumber = phoneNumber.match(/\d/g);
@@ -47,10 +58,21 @@ export const login = (phoneNumber, password) => {
         store: responseJson.store,
         type: actionTypes.UPDATE_STORE
       })
+    }else{
+      throw Error(responseJson.error);
     }
   })
   .catch((error) => {
-    console.log('__________' + error)
+    switch(error.message){
+      case 'phoneNumberNotExist':
+        okAlert('Phone Number Not Exist', 'Check your number buddy');
+      break;
+      case 'passwordNotMatch':
+        okAlert('Password Not Match', 'Check your password buddy');
+      break;
+    }
+    
+    
   })
 
   dispatch({type: actionTypes.ON_LOGGING})
@@ -58,32 +80,49 @@ export const login = (phoneNumber, password) => {
 }
 
 export const autoLogin = (token) => {
+  var requestHeader = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  }
+
+  var requestBody = {
+    token: token
+   }
+
+   var request = {
+     method: 'POST',
+     headers: requestHeader,
+     body: JSON.stringify(requestBody)
+   }
+
   return dispatch => {
-    fetch('http://localhost:8080/user/autoSignin',
-      {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({token: token})
-      }
-    )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      //Login Success
+   fetch('http://localhost:8080/user/autoSignin', request)
+  .then((response) => response.json())
+  .then((responseJson) => {
       if(responseJson.success){
         console.log(responseJson.token);
         AsyncStorage.setItem('token', responseJson.token);
         Actions.home()
         dispatch({type: actionTypes.LOGIN_SUCCESS})
-        dispatch({user: responseJson.user , type: actionTypes.UPDATE_USER})
-        dispatch({store: responseJson.store , type: actionTypes.UPDATE_STORE})
+        dispatch({
+          user: responseJson.user ,
+          type: actionTypes.UPDATE_USER
+        })
+        dispatch({
+          store: responseJson.store ,
+          type: actionTypes.UPDATE_STORE
+        })
+      }else{
+        throw Error(responseJson.error);
       }
      }
     )
     .catch((error) => {
-      console.error(error);
+      switch(error.message){
+        case 'autoLoginPhoneNumberError':
+          okAlert('Account Not Exist', 'Check your number buddy');
+        break;
+      }
     });
     dispatch({type: actionTypes.ON_LOGGING})
   }
