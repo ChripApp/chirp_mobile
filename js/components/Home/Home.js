@@ -38,6 +38,16 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#92BBD9',
   },
+  phoneInput:{
+    textAlign: 'center',
+    fontSize: 32,
+    fontWeight: 'bold',
+    height: 50
+  },
+  seatsRow:{
+    flex:1, 
+    flexDirection:'row'
+  },
   text: {
     color: '#fff',
     fontSize: 30,
@@ -64,7 +74,7 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
-    this.props.updateHomeSeats(1);
+    this.props.updateHomeSeats(2);
     updating = setInterval(this._refreshing, 10000);
   }
 
@@ -83,7 +93,7 @@ export default class Home extends Component {
   }
 
    _decrementSeats() {
-    if(this.props.homeSeats > 0){
+    if(this.props.homeSeats > 1){
       this.props.updateHomeSeats(parseInt(this.props.homeSeats) - 1)
     }  
   }
@@ -104,45 +114,55 @@ export default class Home extends Component {
 
 
   render() {
-    
+    var estmin = '';
+    if(this.props.store != undefined){
+      estmin = "(" + (this.props.store.estmin * this.props.store.waiting) + "min)";
+    }
+    console.log(this.props);
     return (
         <Swiper style={styles.wrapper} showsButtons={true}>
           <View style={styles.slide1}>
-            <TouchableHighlight onPress={this._handleNewCustomer}>
-              <Text style={{color: '#999999', fontSize: 17.2}}>
-                Profile
+            <View style={{flex:3, alignItems:'center', justifyContent: 'flex-end'}}>
+              <Text>
+                {this.props.store ? this.props.store.name : ""}
               </Text>
-            </TouchableHighlight>
-            <Text>
-              {this.props.store ? this.props.store.name : ""}
-            </Text>
-            <Text>
-              {this.props.store ? this.props.store.queue.length + " groups are waiting now" : ""}
-            </Text>
-            <InputNormal
-              placeholder='Phone Number'
-              dataDetectorTypes="phoneNumber"
-              onChangeText={this._handleCurrentPhoneNumber}
-              value={this.props.homePhoneNumber}
-            />
-            <TouchableHighlight onPress={this._decrementSeats}>
-              <Text style={{color: '#999999', fontSize: 17.2}}>
-                Decrement
+              <Text>
+                {this.props.store ? this.props.store.queue.length + estmin + " groups are waiting now" : ""}
               </Text>
-            </TouchableHighlight>
-            <Text>
-                { this.props.homeSeats }
-            </Text>
-            <TouchableHighlight onPress={this._incrementSeats}>
-              <Text style={{color: '#999999', fontSize: 17.2}}>
-                Increment
-              </Text>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={this._handleNewCustomer}>
-              <Text style={{color: '#999999', fontSize: 17.2}}>
-                Register
-              </Text>
-            </TouchableHighlight>
+              <InputNormal
+                style={styles.phoneInput}
+                placeholder='Phone Number'
+                dataDetectorTypes="phoneNumber"
+                onChangeText={this._handleCurrentPhoneNumber}
+                value={this.props.homePhoneNumber}
+              />
+            </View>
+
+            <View style={styles.seatsRow}>
+              <TouchableHighlight style={{flex:1, alignItems:'center', justifyContent:'center'}} onPress={this._decrementSeats}>
+                <Text style={{color: '#999999', fontSize: 17.2}}>
+                  Decrement
+                </Text>
+              </TouchableHighlight>
+              <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
+                    { this.props.homeSeats }
+                </Text>
+              </View>
+              <TouchableHighlight style={{flex:1, alignItems:'center', justifyContent:'center'}} onPress={this._incrementSeats}>
+                <Text style={{color: '#999999', fontSize: 17.2}}>
+                  Increment
+                </Text>
+              </TouchableHighlight>
+            </View>
+
+            <View style={{flex:3, alignItems:'center'}}>
+              <TouchableHighlight onPress={this._handleNewCustomer}>
+                <Text style={{color: '#999999', fontSize: 17.2}}>
+                  Register
+                </Text>
+              </TouchableHighlight>
+            </View>
           </View>
           <View style={styles.slide2}>
             <ListView

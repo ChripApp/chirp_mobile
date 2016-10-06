@@ -18,6 +18,8 @@ function okAlert(title, content) {
   );
 }
 
+
+
 export const login = (phoneNumber, password) => {
 
   var phoneNumber = phoneNumber.match(/\d/g);
@@ -45,7 +47,6 @@ export const login = (phoneNumber, password) => {
   .then((response) => response.json())
   .then((responseJson) => {
     //Login Success
-    console.log(responseJson);
     if(responseJson.success){
       AsyncStorage.setItem('token', responseJson.token);
       Actions.main()

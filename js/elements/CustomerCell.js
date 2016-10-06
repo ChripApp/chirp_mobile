@@ -37,7 +37,7 @@ class customerCell extends Component {
 	
 	var endTime = this.state.time;
 	var timeDiff = startTime - endTime;
-	console.log(endTime);
+
 	timeDiff /= 1000;
 	var seconds = Math.round(timeDiff % 60);
 	timeDiff = Math.floor(timeDiff / 60);
@@ -57,8 +57,6 @@ class customerCell extends Component {
 	}else{
 		returnText = days + " days ago";
 	}
-
-	console.log(returnText);
 	return returnText;
   }
 
@@ -75,7 +73,6 @@ class customerCell extends Component {
 	   })}).then((response) => response.json())
 	  .then((responseJson) => {
 	  	 if(responseJson.success){
-	  	 	console.log(data);
 	  	 	this.setState({
 	  	 		time: data.time,
 		     	phoneNumber: this.formatPhoneNumber(responseJson.customer.phoneNumber),

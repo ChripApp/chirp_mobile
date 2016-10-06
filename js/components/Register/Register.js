@@ -66,8 +66,6 @@ export default class Register extends Component {
   }
 
   render() {
-
-
     return (
       <View style={{alignItems: 'center', flex: 1, justifyContent: 'center', padding: 45}}>
 
