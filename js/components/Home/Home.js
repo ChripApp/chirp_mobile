@@ -135,20 +135,20 @@ export default class Home extends Component {
                 />
               </TouchableHighlight>
             </View>
-            <View style={{flex: 1 , alignItems: 'center'}}>
-              <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
-                <View style={{flex: 1}}>
-                  <TouchableHighlight
-                    onPress={this._login}
-                    style={styles.buttonContainer}
-                    underlayColor='transparent'
-                  >
-                    <Text style={styles.buttonText}>
-                      LOGIN
-                    </Text>
-                  </TouchableHighlight>
-                </View>
+            <View style={{flex:3 , alignItems:'center'}}>
+            <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
+              <View style={{flex: 1}}>
+                <TouchableHighlight
+                  onPress={this._handleNewCustomer}
+                  style={styles.buttonContainer}
+                  underlayColor='transparent'
+                >
+                  <Text style={styles.buttonText}>
+                    RESERVE
+                  </Text>
+                </TouchableHighlight>
               </View>
+            </View>
             </View>
           </View>
           {/*Slide 2*/}
