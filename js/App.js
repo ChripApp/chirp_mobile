@@ -32,11 +32,12 @@ export default class App extends Component {
             <Scene component={Splash} initial={true} key='splash' title='Splash Page'/>
             <Scene component={Login} hideNavBar key='login' sceneStyle={{backgroundColor: '#986B6C'}} title='Login Page'/>
             <Scene component={Register} hideNavBar={false} key='register' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#986B6C'}}/>
-            <Scene key="main" onRight={() => Actions.profile()} rightTitle='Profile' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}}>
+            <Scene key="main" onRight={() => Actions.profile()} navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}}>
               <Scene
                 component={Home}
                 initial={true}
                 key='home'
+                rightTitle='Profile'
                 sceneStyle={{backgroundColor: '#986B6C'}}
                 type='reset'
               />

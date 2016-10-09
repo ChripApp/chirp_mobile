@@ -93,7 +93,7 @@ class customerCell extends Component {
   }
 
   _dequeue() {
-  	this.props.dequeue(this.state.customerId, this.state.phoneNumber);
+  	this.props.dequeue(this.state.customerId, this.state.phoneNumber, this.state.seats);
   }
 
   render() {

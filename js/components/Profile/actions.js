@@ -53,6 +53,9 @@ export const updateProfileStore = (store, name, estmin) => {
 	          store: responseJson.store, 
 	          type: actionTypes.UPDATE_STORE
 	        })
+        updateProfileStoreName(responseJson.store.name);
+        updateProfileEstMin("" +  responseJson.store.estmin);
+        Actions.home();
 	    }else{
         throw Error(responseJson.error);
       }

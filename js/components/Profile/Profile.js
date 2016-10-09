@@ -17,16 +17,10 @@ export default class Profile extends Component {
     this._updateStore = this._updateStore.bind(this);
     this._logout = this._logout.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
-    // if(nextProps.store){
-    //   this.props.updateProfileEstMin(nextProps.store.name);
-    //   this.props.updateProfileEstMin(nextProps.store.estmin);
-    // }
-  }
-  componentDidMount() {
+  componentWillMount() {
     if(this.props.store){
       this.props.updateProfileStoreName(this.props.store.name);
-      this.props.updateProfileEstMin(this.props.store.estmin);
+      this.props.updateProfileEstMin("" + this.props.store.estmin);
     }
   }
 
@@ -47,14 +41,14 @@ export default class Profile extends Component {
   }
 
   render() {
-    
+    console.log(this.props);
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <TextInput
           style={[styles.transInput, {marginBottom: 15}]}
           placeholderTextColor='rgba(255,255,255,0.18)'
           placeholder='STORE NAME'
-          onChangeText={this.updateProfileStoreName}
+          onChangeText={this._handleCurrentStoreName}
           value={this.props.storename}
         />
         <TextInput

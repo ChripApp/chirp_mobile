@@ -114,6 +114,7 @@ export const enqueue = (store, phoneNumber, seats) => {
 
 export const dequeue = (store, customer, phoneNumber, seats) => {
 
+  console.log(store + "  " + customer);
   var phoneNumber = phoneNumber.match(/\d/g);
   phoneNumber = phoneNumber.join("");
   phoneNumber = '+1' + phoneNumber;
@@ -127,7 +128,7 @@ export const dequeue = (store, customer, phoneNumber, seats) => {
     store: store,
     customer: customer,
     phoneNumber: phoneNumber,
-    seats: seats
+    seats: seats,
   }
 
   var request = {
@@ -140,6 +141,7 @@ export const dequeue = (store, customer, phoneNumber, seats) => {
   fetch('http://localhost:8080/store/dequeue', request)
   .then((response) => response.json())
   .then((responseJson) => {
+    console.log(responseJson);
     if(responseJson.success){
     	dispatch({
         store: responseJson.store , 

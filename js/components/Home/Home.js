@@ -69,14 +69,14 @@ export default class Home extends Component {
     this.props.enqueue(this.props.store._id, this.props.homePhoneNumber, this.props.homeSeats)
   }
 
-  _handleRemoveCustomer(customerId, phoneNumber) {
-    this.props.dequeue(this.props.store._id, customerId, phoneNumber)
+  _handleRemoveCustomer(customerId, phoneNumber, seats) {
+    this.props.dequeue(this.props.store._id, customerId, phoneNumber, seats)
   }
 
 
   render() {
     var estmin = '';
-    if(this.props.store != undefined){
+    if(this.props.store != undefined && this.props.store.estmin && this.props.store.waiting){
       estmin = " (" + (this.props.store.estmin * this.props.store.waiting) + " MIN)";
     }
     console.log(this.props);
@@ -94,6 +94,9 @@ export default class Home extends Component {
            {/*<Text>
                 {this.props.store ? this.props.store.name : ""}
               </Text>*/}
+              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 30}}>
+                {this.props.store ? this.props.store.name : null}
+              </Text>
               <View>
                 <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 30}}>
                   GROUPS AHEAD
@@ -113,27 +116,29 @@ export default class Home extends Component {
               />
             </View>
             <View style={styles.seatsRow}>
-              <TouchableHighlight
-                onPress={this._decrementSeats}
-                style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}}
-              >
-                <Image
-                  source={require('../../../public/assets/img/minus.png')}
-                />
-              </TouchableHighlight>
+              <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <TouchableHighlight
+                  onPress={this._decrementSeats}
+                >
+                  <Image
+                    source={require('../../../public/assets/img/minus.png')}
+                  />
+                </TouchableHighlight>
+              </View>
               <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
                 <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
                     {this.props.homeSeats}
                 </Text>
               </View>
-              <TouchableHighlight
-                onPress={this._incrementSeats}
-                style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
-              >
-                <Image
-                  source={require('../../../public/assets/img/plusFilled.png')}
-                />
-              </TouchableHighlight>
+              <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <TouchableHighlight
+                  onPress={this._incrementSeats}
+                >
+                    <Image
+                      source={require('../../../public/assets/img/plusFilled.png')}
+                    />
+                </TouchableHighlight>
+              </View>
             </View>
             <View style={{flex:3 , alignItems:'center'}}>
             <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
