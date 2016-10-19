@@ -56,6 +56,10 @@ export const login = (phoneNumber, password) => {
         type: actionTypes.UPDATE_USER
       })
       dispatch({
+        password: '',
+        type: actionTypes.UPDATE_LOGIN_PASSWORD
+      })
+      dispatch({
         store: responseJson.store,
         type: actionTypes.UPDATE_STORE
       })
@@ -108,6 +112,10 @@ export const autoLogin = (token) => {
         dispatch({
           user: responseJson.user ,
           type: actionTypes.UPDATE_USER
+        })
+        dispatch({
+          password: '',
+          type: actionTypes.UPDATE_LOGIN_PASSWORD
         })
         dispatch({
           store: responseJson.store ,

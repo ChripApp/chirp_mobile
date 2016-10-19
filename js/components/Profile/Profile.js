@@ -12,16 +12,42 @@ import {
 export default class Profile extends Component {
   constructor() {
     super();
+    this.state = {
+
+    };
+    this._handleCurrentPassword = this._handleCurrentPassword.bind(this);
     this._handleCurrentStoreName = this._handleCurrentStoreName.bind(this);
     this._handleCurrentEstMin = this._handleCurrentEstMin.bind(this);
     this._updateStore = this._updateStore.bind(this);
+    this._verify = this._verify.bind(this);
+    this._reset = this._reset.bind(this);
     this._logout = this._logout.bind(this);
   }
   componentWillMount() {
     if(this.props.store){
       this.props.updateProfileStoreName(this.props.store.name);
-      this.props.updateProfileEstMin("" + this.props.store.estmin);
+
+      if(this.props.store.estmin != undefined){
+        this.props.updateProfileEstMin("" + this.props.store.estmin);
+      }
     }
+  }
+
+  componentWillUnmount(){
+    this.props.updateVerificationStatus(false);
+  }
+
+  componentWillReceiveProps(newProps){
+    console.log(newProps);
+    if(newProps.verified == true){
+      this.setState({
+        verified: true
+      });
+    }
+  }
+
+  _handleCurrentPassword(text) {
+    this.props.updateProfilePassword(text);
   }
 
   _handleCurrentStoreName(text) {
@@ -36,13 +62,51 @@ export default class Profile extends Component {
     this.props.updateProfileStore(this.props.store._id, this.props.storename, this.props.estmin)
   }
 
+  _verify() {
+    this.props.verify(this.props.user.phoneNumber, this.props.verificationPassword)
+  }
+
+  _reset() {
+    this.props.reset(this.props.store._id)
+  }
+
   _logout() {
     this.props.logout()
   }
 
   render() {
     console.log(this.props);
-    return (
+    if(!this.state.verified)
+      return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>
+          Verification
+        </Text>
+        <TextInput
+          style={[styles.transInput, {marginBottom: 15}]}
+          placeholderTextColor='rgba(255,255,255,0.18)'
+          placeholder='PASSWORD'
+          onChangeText={this._handleCurrentPassword}
+          value={this.props.verificationPassword}
+        />
+        <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
+            <View style={{flex: 1}}>
+              <TouchableHighlight
+                onPress={this._verify}
+                style={styles.buttonContainer}
+                underlayColor='transparent'
+              >
+                <Text style={styles.buttonText}>
+                  VERIFY
+                </Text>
+              </TouchableHighlight>
+          </View>
+        </View>
+      </View>
+      )
+    else
+      return (
+
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <TextInput
           style={[styles.transInput, {marginBottom: 15}]}
@@ -58,7 +122,7 @@ export default class Profile extends Component {
           onChangeText={this._handleCurrentEstMin}
           value={this.props.estmin}
         />
-        <View style={{height: 45, flexDirection: 'row'}}>
+        <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
             <View style={{flex: 1}}>
               <TouchableHighlight
                 onPress={this._updateStore}
@@ -71,7 +135,20 @@ export default class Profile extends Component {
               </TouchableHighlight>
           </View>
         </View>
-        <View style={{height: 45, flexDirection: 'row'}}>
+        <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
+            <View style={{flex: 1}}>
+              <TouchableHighlight
+                onPress={this._reset}
+                style={styles.buttonContainer}
+                underlayColor='transparent'
+              >
+                <Text style={styles.buttonText}>
+                  RESET
+                </Text>
+              </TouchableHighlight>
+          </View>
+        </View>
+        <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
             <View style={{flex: 1}}>
               <TouchableHighlight
                 onPress={this._logout}

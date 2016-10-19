@@ -9,6 +9,83 @@ export const profile = () => {
   console.log('Profile')
 }
 
+export const verify = (phoneNumber , password) => {
+  
+    var requestHeader = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+   }
+
+   var requestBody = {
+    phoneNumber: phoneNumber,
+    password: password
+   }
+
+   var request = {
+     method: 'POST',
+     headers: requestHeader,
+     body: JSON.stringify(requestBody)
+   }
+  return dispatch => {
+  fetch('http://localhost:8080/user/verify', request)
+  .then((response) => response.json())
+  .then((responseJson) => {
+      if(responseJson.success){
+         dispatch({
+          verified: true,
+          type: actionTypes.UPDATE_PROFILE_VERIFICATION
+         })
+      }else{
+        dispatch({
+          verified: false,
+          type: actionTypes.UPDATE_PROFILE_VERIFICATION
+         })
+      }
+
+     })
+    .catch((error) => {
+      dispatch({
+        verified: false,
+        type: actionTypes.UPDATE_PROFILE_VERIFICATION
+       })
+    });
+  }
+}
+
+export const reset = (store) => {
+  
+    var requestHeader = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+   }
+
+   var requestBody = {
+    store: store
+   }
+
+   var request = {
+     method: 'POST',
+     headers: requestHeader,
+     body: JSON.stringify(requestBody)
+   }
+
+  return dispatch => {
+  fetch('http://localhost:8080/store/reset', request)
+  .then((response) => response.json())
+  .then((responseJson) => {
+      if(responseJson.success){
+         dispatch({
+            store: responseJson.store, 
+            type: actionTypes.UPDATE_STORE
+         })
+         Actions.home();
+      }
+     })
+    .catch((error) => {
+    });
+  }
+}
+
 export const logout = () => {
   return dispatch => {
     dispatch({
@@ -27,6 +104,10 @@ export const logout = () => {
 
 export const updateProfileStore = (store, name, estmin) => {
   console.log(store + " " + name + " "  + estmin + "man");
+  if(estmin == undefined){
+    estmin = 0;
+  }
+
   var requestHeader = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -54,7 +135,10 @@ export const updateProfileStore = (store, name, estmin) => {
 	          type: actionTypes.UPDATE_STORE
 	        })
         updateProfileStoreName(responseJson.store.name);
-        updateProfileEstMin("" +  responseJson.store.estmin);
+        if(responseJson.store.estmin != undefined){
+          updateProfileEstMin("" +  responseJson.store.estmin);
+        }
+        
         Actions.home();
 	    }else{
         throw Error(responseJson.error);
@@ -64,6 +148,20 @@ export const updateProfileStore = (store, name, estmin) => {
 	  .catch((error) => {
 	  });
    }
+}
+
+export const updateProfilePassword = (text) => {
+  return {
+    type: actionTypes.UPDATE_PROFILE_PASSWORD,
+    verificationPassword: text,
+  }
+}
+
+export const updateVerificationStatus = (text) => {
+  return {
+    type: actionTypes.UPDATE_PROFILE_VERIFICATION,
+    verified: text,
+  }
 }
 
 export const updateProfileStoreName = (text) => {
