@@ -45,6 +45,7 @@ export default class App extends Component {
               <Scene
                 component={Profile}
                 direction='vertical'
+                rightTitle=''
                 key='profile'
                 sceneStyle={{backgroundColor: '#FFEC56'}}
               />

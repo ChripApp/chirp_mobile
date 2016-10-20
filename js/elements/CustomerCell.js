@@ -87,9 +87,14 @@ class customerCell extends Component {
   }
   componentWillMount() {
   	this._loadCustomer(this.props.data);
+    this._mounted = true;
+  }
+  componentWillUnmount() {
+    this._mounted = false;
   }
   componentWillReceiveProps(newProps) {
-  	this._loadCustomer(newProps.data);
+    if(this._mounted)
+  	 this._loadCustomer(newProps.data);
   }
 
   _dequeue() {

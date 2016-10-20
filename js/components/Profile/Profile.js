@@ -41,12 +41,7 @@ export default class Profile extends Component {
   }
 
   componentWillReceiveProps(newProps){
-    console.log(newProps);
-    if(newProps.verified == true){
-      this.setState({
-        verified: true
-      });
-    }
+ 
   }
 
   _handleCurrentPassword(text) {
@@ -100,7 +95,7 @@ export default class Profile extends Component {
 
   render() {
     console.log(this.props);
-    if(!this.state.verified)
+    if(!this.props.verified)
       return (
       <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
         <Text style={styles.titleText}>
