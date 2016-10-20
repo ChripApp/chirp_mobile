@@ -8,7 +8,9 @@ import {
   TouchableHighlight,
   StyleSheet,
   TextInput,
-  Picker
+  Picker,
+  Alert,
+  NavigatorIOS,
 } from 'react-native'
 
 import InputNormal from '../../elements/InputNormal'
@@ -35,8 +37,9 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
-    this.props.updateHomeSeats(2);
+    this.props.updateHomeSeats(1);
     updating = setInterval(this._refreshing, 10000);
+  
   }
 
   componentWillUnmount() {
@@ -50,7 +53,24 @@ export default class Home extends Component {
   }
 
   _handleCurrentPhoneNumber(text) {
-    this.props.updateHomePhoneNumber(text)
+
+    var phoneNumber = text.match(/\d/g);
+    if(phoneNumber != undefined){
+      phoneNumber = phoneNumber.join("");
+        if(phoneNumber.length >= 10)
+        phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, 6) + '-' + phoneNumber.substring(6, 10);
+      else if(phoneNumber.length >= 7)
+        phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, 6) + '-' + phoneNumber.substring(6, phoneNumber.length);
+      else if(phoneNumber.length >= 4)
+        phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, phoneNumber.length);
+      else if(phoneNumber.length >= 1)
+        phoneNumber = '(' + phoneNumber.substring(0, phoneNumber.length);
+      else
+        phoneNumber = '';
+    }else{
+      phoneNumber = '';
+    }
+    this.props.updateHomePhoneNumber(phoneNumber)
   }
 
    _decrementSeats() {
@@ -66,6 +86,17 @@ export default class Home extends Component {
   }
 
   _handleNewCustomer() {
+
+    if(this.props.homePhoneNumber == undefined || this.props.homePhoneNumber.length < 14){
+      Alert.alert(
+        "Sorry",
+        "Please enter phone number",
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+        ]
+      );
+      return;
+    }
     this.props.enqueue(this.props.store._id, this.props.homePhoneNumber, this.props.homeSeats)
   }
 
@@ -108,15 +139,20 @@ export default class Home extends Component {
 
               <TextInput
                 keyboardType='phone-pad'
+                maxLength={14}
                 onChangeText={this._handleCurrentPhoneNumber}
                 placeholderTextColor='rgba(255,255,255,0.18)'
                 placeholder='ENTER PHONE #'
                 style={[styles.transInput, {marginBottom: 15}]}
                 value={this.props.homePhoneNumber}
               />
+
             </View>
             <View style={styles.seatsRow}>
+           
+              
               <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                { this.props.homeSeats > 1 ? 
                 <TouchableHighlight
                   onPress={this._decrementSeats}
                 >
@@ -124,13 +160,17 @@ export default class Home extends Component {
                     source={require('../../../public/assets/img/minus.png')}
                   />
                 </TouchableHighlight>
+                : null }
               </View>
+              
               <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
                 <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
                     {this.props.homeSeats}
                 </Text>
               </View>
-              <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+             
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                 { this.props.homeSeats < 15 ? 
                 <TouchableHighlight
                   onPress={this._incrementSeats}
                 >
@@ -138,7 +178,10 @@ export default class Home extends Component {
                       source={require('../../../public/assets/img/plusFilled.png')}
                     />
                 </TouchableHighlight>
+                : null}
               </View>
+                
+              
             </View>
             <View style={{flex:3 , alignItems:'center'}}>
             <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
@@ -235,7 +278,7 @@ var styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: 'rgba(255,255,255,0.18)',
     height: 45,
-    padding: 15,
+    padding: 10,
     fontFamily: 'Arial',
     fontSize: 19,
     textAlign: 'center',

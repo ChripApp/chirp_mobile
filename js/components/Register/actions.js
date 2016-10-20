@@ -99,9 +99,10 @@ export const updatePassword = (text) => {
   }
 }
 
-export const updateStoreName = (text) => {
+export const updateConfirmPassword = (text) => {
   return {
-    type: actionTypes.UPDATE_REGISTER_STORENAME,
-    storeName: text,
+    type: actionTypes.UPDATE_REGISTER_PASSWORDCONFIRM,
+    passwordConfirm: text,
   }
 }
+

@@ -13,11 +13,13 @@ import InputNormal from '../../elements/InputNormal'
 export default class Splash extends Component {
   constructor() {
     super();
+
     AsyncStorage.getItem('token', (err, result) => {
     	if(result){
-       Actions.login()
-    	 Actions.home()
-       this.props.autoLogin(result)
+       //Actions.login()
+       this.props.autoLogin(result);
+    	 Actions.main();
+       console.log(Actions);
     	}else if(err || !result){
     		Actions.login();
     	}

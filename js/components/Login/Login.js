@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableHighlight,
   View,
+  Alert
 } from 'react-native'
 
 import { Actions } from 'react-native-router-flux'
@@ -30,7 +31,23 @@ export default class Login extends Component {
   }
 
   _handleCurrentPhoneNumber(text) {
-    this.props.updatePhoneNumber(text)
+    var phoneNumber = text.match(/\d/g);
+    if(phoneNumber != undefined){
+      phoneNumber = phoneNumber.join("");
+        if(phoneNumber.length >= 10)
+        phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, 6) + '-' + phoneNumber.substring(6, 10);
+      else if(phoneNumber.length >= 7)
+        phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, 6) + '-' + phoneNumber.substring(6, phoneNumber.length);
+      else if(phoneNumber.length >= 4)
+        phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, phoneNumber.length);
+      else if(phoneNumber.length >= 1)
+        phoneNumber = '(' + phoneNumber.substring(0, phoneNumber.length);
+      else
+        phoneNumber = '';
+    }else{
+      phoneNumber = '';
+    }
+    this.props.updatePhoneNumber(phoneNumber)
   }
 
   _handleCurrentPassword(text) {
@@ -38,7 +55,29 @@ export default class Login extends Component {
   }
 
   _login(){
+    if(this.props.phoneNumber == undefined){
+      Alert.alert(
+        "Sorry",
+        "Please enter registered phone number",
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+        ]
+      );
+      return;
+    }else if(this.props.password == undefined){
+      Alert.alert(
+        "Sorry",
+        "Please enter password",
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+        ]
+      );
+      return;
+    }
+
     this.props.login(this.props.phoneNumber, this.props.password)
+    
+    
   }
 
   render() {
@@ -58,6 +97,7 @@ export default class Login extends Component {
             style={[styles.transInput, {marginBottom: 15}]}
             placeholderTextColor='rgba(255,255,255,0.18)'
             placeholder='ENTER PHONE #'
+            maxLength={14}
             onChangeText={this._handleCurrentPhoneNumber}
             value={this.props.phoneNumber}
             keyboardType='phone-pad'
@@ -66,6 +106,8 @@ export default class Login extends Component {
             style={styles.transInput}
             placeholderTextColor='rgba(255,255,255,0.18)'
             placeholder='ENTER PASSWORD'
+            autoCapitalize="none"
+            autoCorrect={false}
             onChangeText={this._handleCurrentPassword}
             value={this.props.password}
           />

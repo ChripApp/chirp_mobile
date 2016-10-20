@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
   TouchableHighlight,
+  Alert
 } from 'react-native'
 
 import InputNormal from '../../elements/InputNormal'
@@ -19,27 +20,34 @@ export default class Register extends Component {
     this._handleCurrentFirstName = this._handleCurrentFirstName.bind(this);
     this._handleCurrentLastName = this._handleCurrentLastName.bind(this);
     this._handleCurrentPassword = this._handleCurrentPassword.bind(this);
-    this._handleCurrentStoreName = this._handleCurrentStoreName.bind(this);
+    this._handleCurrentConfirmPassword = this._handleCurrentConfirmPassword.bind(this);
 
     this._register = this._register.bind(this);
   }
 
   _handleCurrentPhoneNumber(text) {
-    var lastType = text.charAt(text.length - 1);
-    var format = text;
 
-    if(text.length >= 14)
-      return;
-    else if(lastType == '(' || lastType == ')' || lastType == '-')
-      format = format.substring(0, format.length - 1);
-    else if(text.length == 1)
-      format = '(' + format;
-    else if(text.length == 4)
-      format = format + ')';
-    else if(text.length == 9)
-      format = format.substring(0, 8) + '-' + format.substring(8, 9);
+    var phoneNumber = text.match(/\d/g);
+    if(phoneNumber != undefined){
+      phoneNumber = phoneNumber.join("");
+      if(phoneNumber.length >= 10)
+        phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, 6) + '-' + phoneNumber.substring(6, 10);
+      else if(phoneNumber.length >= 7)
+        phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, 6) + '-' + phoneNumber.substring(6, phoneNumber.length);
+      else if(phoneNumber.length >= 4)
+        phoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, phoneNumber.length);
+      else if(phoneNumber.length >= 1)
+        phoneNumber = '(' + phoneNumber.substring(0, phoneNumber.length);
+      else
+        phoneNumber = '';
+    }else{
+      phoneNumber = '';
+    }
 
-    this.props.updatePhoneNumber(format)
+
+    
+    
+    this.props.updatePhoneNumber(phoneNumber)
   }
 
   _handleCurrentFirstName(text) {
@@ -53,16 +61,52 @@ export default class Register extends Component {
   _handleCurrentPassword(text) {
     this.props.updatePassword(text)
   }
-
-  _handleCurrentStoreName(text) {
-    this.props.updateStoreName(text)
+  _handleCurrentConfirmPassword(text) {
+    this.props.updateConfirmPassword(text)
+    console.log(this.props);
   }
 
+
   _register() {
-      if(this.props.phoneNumber.length >= 13 && this.props.firstName != undefined
-        && this.props.lastName != undefined && this.props.password != undefined){
-        this.props.register(this.props.phoneNumber, this.props.firstName, this.props.lastName, this.props.password)
+      if(this.props.phoneNumber == undefined || this.props.phoneNumber.length < 14){
+        Alert.alert(
+          "Sorry",
+          "Please enter registered phone number",
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed!')},
+          ]
+        );
+        return;
+      }else if(this.props.firstName == undefined || this.props.lastName == undefined){
+        Alert.alert(
+          "Sorry",
+          "Please enter your name",
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed!')},
+          ]
+        );
+        return;
+      }else if(this.props.password == undefined){
+        Alert.alert(
+          "Sorry",
+          "Please enter the password",
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed!')},
+          ]
+        );
+        return;
+      }else if(this.props.password != this.props.passwordConfirm){
+        Alert.alert(
+          "Sorry",
+          "Please check confirm password",
+          [
+            {text: 'OK', onPress: () => console.log('OK Pressed!')},
+          ]
+        );
+        return;
       }
+      
+      this.props.register(this.props.phoneNumber, this.props.firstName, this.props.lastName, this.props.password)
   }
 
   render() {
@@ -73,6 +117,7 @@ export default class Register extends Component {
           style={[styles.transInput, {marginBottom: 15}]}
           placeholderTextColor='rgba(255,255,255,0.18)'
           placeholder='PHONE #'
+          maxLength={14}
           onChangeText={this._handleCurrentPhoneNumber}
           value={this.props.phoneNumber}
           keyboardType='phone-pad'
@@ -82,6 +127,7 @@ export default class Register extends Component {
           style={[styles.transInput, {marginBottom: 15}]}
           placeholderTextColor='rgba(255,255,255,0.18)'
           placeholder='FIRST NAME'
+          autoCorrect={false}
           onChangeText={this._handleCurrentFirstName}
           value={this.props.firstName}
         />
@@ -90,6 +136,7 @@ export default class Register extends Component {
           style={[styles.transInput, {marginBottom: 15}]}
           placeholderTextColor='rgba(255,255,255,0.18)'
           placeholder='LAST NAME'
+          autoCorrect={false}
           onChangeText={this._handleCurrentLastName}
           value={this.props.lastName}
         />
@@ -98,8 +145,20 @@ export default class Register extends Component {
           style={[styles.transInput, {marginBottom: 15}]}
           placeholderTextColor='rgba(255,255,255,0.18)'
           placeholder='PASSWORD'
+          autoCorrect={false}
+          autoCapitalize="none"
           onChangeText={this._handleCurrentPassword}
           value={this.props.password}
+        />
+
+        <TextInput
+          style={[styles.transInput, {marginBottom: 15}]}
+          placeholderTextColor='rgba(255,255,255,0.18)'
+          placeholder='CONFIRM PASSWORD'
+          autoCorrect={false}
+          autoCapitalize="none"
+          onChangeText={this._handleCurrentConfirmPassword}
+          value={this.props.passwordConfirm}
         />
 
         {/*<InputNormal

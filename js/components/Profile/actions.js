@@ -3,12 +3,22 @@ import { getLogin, getProfile } from '../../reducers/rootReducer'
 import { Actions } from 'react-native-router-flux'
 import {
   AsyncStorage,
+  Alert,
 } from 'react-native'
 
 export const profile = () => {
   console.log('Profile')
 }
 
+function okAlert(title, content) {
+  Alert.alert(
+    title,
+    content,
+    [
+      {text: 'OK', onPress: () => console.log('OK Pressed!')},
+    ]
+  );
+}
 export const verify = (phoneNumber , password) => {
   
     var requestHeader = {
@@ -35,19 +45,28 @@ export const verify = (phoneNumber , password) => {
           verified: true,
           type: actionTypes.UPDATE_PROFILE_VERIFICATION
          })
+         dispatch({
+            password: '',
+            type: actionTypes.UPDATE_PROFILE_PASSWORD
+          })
       }else{
-        dispatch({
+         dispatch({
           verified: false,
           type: actionTypes.UPDATE_PROFILE_VERIFICATION
          })
+        throw Error(responseJson.error);
       }
 
      })
     .catch((error) => {
-      dispatch({
-        verified: false,
-        type: actionTypes.UPDATE_PROFILE_VERIFICATION
-       })
+       switch(error.message){
+        case 'phoneNumberNotExist':
+          okAlert('Phone Number Not Exist', 'Check your number buddy');
+        break;
+        case 'passwordNotMatch':
+          okAlert('Password Not Match', 'Check your password buddy');
+        break;
+      }
     });
   }
 }
@@ -96,6 +115,10 @@ export const logout = () => {
       store: undefined,
       type: actionTypes.UPDATE_STORE
     })
+    dispatch({
+      verified: false,
+      type: actionTypes.UPDATE_PROFILE_VERIFICATION
+     })
     AsyncStorage.removeItem('token');
     Actions.login();
   }

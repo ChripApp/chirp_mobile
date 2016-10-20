@@ -89,6 +89,7 @@ export const autoLogin = (token) => {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   }
+  console.log("autolog in");
 
   var requestBody = {
     token: token
@@ -105,9 +106,7 @@ export const autoLogin = (token) => {
   .then((response) => response.json())
   .then((responseJson) => {
       if(responseJson.success){
-        console.log(responseJson.token);
         AsyncStorage.setItem('token', responseJson.token);
-        Actions.home()
         dispatch({type: actionTypes.LOGIN_SUCCESS})
         dispatch({
           user: responseJson.user ,
@@ -121,6 +120,7 @@ export const autoLogin = (token) => {
           store: responseJson.store ,
           type: actionTypes.UPDATE_STORE
         })
+
       }else{
         throw Error(responseJson.error);
       }

@@ -5,7 +5,8 @@ import {
   View,
   TouchableHighlight,
   TextInput,
-  StyleSheet
+  StyleSheet,
+  Alert
 } from 'react-native'
 
 
@@ -29,6 +30,8 @@ export default class Profile extends Component {
 
       if(this.props.store.estmin != undefined){
         this.props.updateProfileEstMin("" + this.props.store.estmin);
+      }else{
+        this.props.updateProfileEstMin("");
       }
     }
   }
@@ -59,10 +62,30 @@ export default class Profile extends Component {
   }
 
   _updateStore() {
+    if(this.props.storename == undefined){
+      Alert.alert(
+        "Sorry",
+        "Please enter the name of the store",
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+        ]
+      );
+      return;
+    }
     this.props.updateProfileStore(this.props.store._id, this.props.storename, this.props.estmin)
   }
 
   _verify() {
+    if(this.props.verificationPassword == undefined){
+      Alert.alert(
+        "Sorry",
+        "Please enter password",
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+        ]
+      );
+      return;
+    }
     this.props.verify(this.props.user.phoneNumber, this.props.verificationPassword)
   }
 
@@ -86,6 +109,8 @@ export default class Profile extends Component {
           style={[styles.transInput, {marginBottom: 15}]}
           placeholderTextColor='rgba(255,255,255,0.18)'
           placeholder='PASSWORD'
+          autoCapitalize="none"
+          autoCorrect={false}
           onChangeText={this._handleCurrentPassword}
           value={this.props.verificationPassword}
         />
@@ -112,6 +137,7 @@ export default class Profile extends Component {
           style={[styles.transInput, {marginBottom: 15}]}
           placeholderTextColor='rgba(255,255,255,0.18)'
           placeholder='STORE NAME'
+          autoCorrect={false}
           onChangeText={this._handleCurrentStoreName}
           value={this.props.storename}
         />

@@ -6,7 +6,9 @@ const DEFAULT_STATE = {
 }
 
 export default function(state = DEFAULT_STATE, action) {
+
   switch(action.type) {
+
     case actionTypes.UPDATE_REGISTER_PHONENUMBER:
       return {
         ...state,
@@ -28,10 +30,10 @@ export default function(state = DEFAULT_STATE, action) {
         password: action.password
       }
 
-    case actionTypes.UPDATE_REGISTER_STORENAME:
+    case actionTypes.UPDATE_REGISTER_PASSWORDCONFIRM:
       return {
         ...state,
-        storeName: action.storeName
+        passwordConfirm: action.passwordConfirm
       }
 
     default:
@@ -45,5 +47,5 @@ export const getRegister = (state) => ({
   firstName: state.firstName,
   lastName: state.lastName,
   password: state.password,
-  storeName: state.storeName
+  passwordConfirm: state.passwordConfirm
 })
