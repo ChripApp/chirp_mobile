@@ -76,6 +76,7 @@ export default class Profile extends Component {
   }
 
   _verify() {
+    console.log(this.props);
     if(this.props.verificationPassword == undefined){
       Alert.alert(
         "Sorry",

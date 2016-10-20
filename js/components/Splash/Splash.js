@@ -19,7 +19,6 @@ export default class Splash extends Component {
        //Actions.login()
        this.props.autoLogin(result);
     	 Actions.main();
-       console.log(Actions);
     	}else if(err || !result){
     		Actions.login();
     	}

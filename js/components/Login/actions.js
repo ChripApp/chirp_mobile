@@ -89,7 +89,6 @@ export const autoLogin = (token) => {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   }
-  console.log("autolog in");
 
   var requestBody = {
     token: token
