@@ -53,34 +53,34 @@ export default class Login extends Component {
             source={require('../../../public/assets/img/chirplogo.png')}
             style={styles.chirpImg}
           />
-          {/*<Text style={styles.chirpText}>Chirp</Text>*/}
+          {/* rgba(255,255,255,0.18) <Text style={styles.chirpText}>Chirp</Text>*/}
           <TextInput
-            style={[styles.transInput, {marginBottom: 15}]}
-            placeholderTextColor='rgba(255,255,255,0.18)'
-            placeholder='ENTER PHONE #'
+            style={styles.transInput}
+            placeholderTextColor='#88898C'
+            placeholder='Enter Phone #'
             onChangeText={this._handleCurrentPhoneNumber}
             value={this.props.phoneNumber}
             keyboardType='phone-pad'
           />
           <TextInput
             style={styles.transInput}
-            placeholderTextColor='rgba(255,255,255,0.18)'
-            placeholder='ENTER PASSWORD'
+            placeholderTextColor='#88898C'
+            placeholder='Enter Password'
             onChangeText={this._handleCurrentPassword}
             value={this.props.password}
           />
         </View>
 
-        <View style={{flex: 1, justifyContent: 'flex-end'}}>
-          <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
+        <View style={{flex: 1, justifyContent: 'flex-start'}}>
+          <View style={{height: 45, flexDirection: 'row',}}>
             <View style={{flex: 1}}>
               <TouchableHighlight
                 onPress={this._login}
-                style={styles.buttonContainer}
+                style={styles.loginButtonContainer}
                 underlayColor='transparent'
               >
                 <Text style={styles.buttonText}>
-                  LOGIN
+                  Log In
                 </Text>
               </TouchableHighlight>
             </View>
@@ -90,11 +90,11 @@ export default class Login extends Component {
             <View style={{flex: 1}}>
               <TouchableHighlight
                 onPress={Actions.register}
-                style={styles.buttonContainer}
+                style={styles.registerButtonContainer}
                 underlayColor='transparent'
               >
                 <Text style={styles.buttonText}>
-                  REGISTER
+                  Register
                 </Text>
               </TouchableHighlight>
             </View>
@@ -106,12 +106,32 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    backgroundColor: 'rgba(255,255,255,0.18)',
+  registerButtonContainer: {
+    // backgroundColor: 'rgba(255,255,255,0.18)',
+    // backgroundColor: '#ADDCE9',
+// backgroundColor: '#F4F3F1',
+backgroundColor: 'rgba(255,255,255,0.35)',
+
+    // backgroundColor: '#FEC89A',
     borderWidth: 0,
     // borderColor: 'rgba(255,255,255,0.2)',
     borderColor: 'black',
-    borderRadius: 25,
+    // borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    flex: 1,
+  },
+  loginButtonContainer: {
+    // backgroundColor: 'rgba(255,255,255,0.18)',
+    // backgroundColor: 'rgba(255,255,255,0.35)',
+    backgroundColor: '#F4F3F1',
+
+    // backgroundColor: '#F4F3F1',
+    borderWidth: 0,
+    // borderColor: 'rgba(255,255,255,0.2)',
+    borderColor: 'black',
+    // borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
@@ -119,8 +139,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     // color: 'rgba(255,255,255,0.2)',
-    color: '#986B6C',
-    fontSize: 13,
+    // color: '#986B6C',
+    color: 'rgba(0,0,0,0.3)',
+    fontSize: 16,
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
   },
@@ -135,14 +156,16 @@ const styles = StyleSheet.create({
   },
   transInput: {
     // backgroundColor: 'rgba(255,255,255,0.1)',
-    borderWidth: 1,
-    borderRadius: 25,
-    borderColor: 'rgba(255,255,255,0.18)',
+    // borderWidth: 1,
+    // borderRadius: 25,
+    // borderColor: 'rgba(255,255,255,0.18)',
+    borderColor: 'black',
     height: 45,
     padding: 15,
     fontFamily: 'Helvetica Neue',
     fontSize: 13,
-    textAlign: 'center',
-    fontWeight: 'bold',
+
+    fontWeight: '200',
+    backgroundColor: 'white',
   },
 })

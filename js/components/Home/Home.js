@@ -119,6 +119,7 @@ export default class Home extends Component {
               <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 <TouchableHighlight
                   onPress={this._decrementSeats}
+                  underlayColor='transparent'
                 >
                   <Image
                     source={require('../../../public/assets/img/minus.png')}
@@ -133,6 +134,7 @@ export default class Home extends Component {
               <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 <TouchableHighlight
                   onPress={this._incrementSeats}
+                  underlayColor='transparent'
                 >
                     <Image
                       source={require('../../../public/assets/img/plusFilled.png')}
