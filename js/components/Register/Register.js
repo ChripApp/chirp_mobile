@@ -44,9 +44,6 @@ export default class Register extends Component {
       phoneNumber = '';
     }
 
-
-    
-    
     this.props.updatePhoneNumber(phoneNumber)
   }
 
@@ -105,7 +102,7 @@ export default class Register extends Component {
         );
         return;
       }
-      
+
       this.props.register(this.props.phoneNumber, this.props.firstName, this.props.lastName, this.props.password)
   }
 
@@ -113,10 +110,13 @@ export default class Register extends Component {
     return (
       <View style={{alignItems: 'center', flex: 1, justifyContent: 'center', padding: 45}}>
 
+        <Text style={styles.titleText}>
+          Register
+        </Text>
         <TextInput
-          style={[styles.transInput, {marginBottom: 15}]}
-          placeholderTextColor='rgba(255,255,255,0.18)'
-          placeholder='PHONE #'
+          style={styles.transInput}
+          placeholderTextColor='#88898C'
+          placeholder='Phone #'
           maxLength={14}
           onChangeText={this._handleCurrentPhoneNumber}
           value={this.props.phoneNumber}
@@ -124,40 +124,42 @@ export default class Register extends Component {
         />
 
         <TextInput
-          style={[styles.transInput, {marginBottom: 15}]}
-          placeholderTextColor='rgba(255,255,255,0.18)'
-          placeholder='FIRST NAME'
+          style={styles.transInput}
+          placeholderTextColor='#88898C'
+          placeholder='First Name'
           autoCorrect={false}
           onChangeText={this._handleCurrentFirstName}
           value={this.props.firstName}
         />
 
         <TextInput
-          style={[styles.transInput, {marginBottom: 15}]}
-          placeholderTextColor='rgba(255,255,255,0.18)'
-          placeholder='LAST NAME'
+          style={styles.transInput}
+          placeholderTextColor='#88898C'
+          placeholder='Last Name'
           autoCorrect={false}
           onChangeText={this._handleCurrentLastName}
           value={this.props.lastName}
         />
 
         <TextInput
-          style={[styles.transInput, {marginBottom: 15}]}
-          placeholderTextColor='rgba(255,255,255,0.18)'
-          placeholder='PASSWORD'
+          style={styles.transInput}
+          placeholderTextColor='#88898C'
+          placeholder='Password'
           autoCorrect={false}
           autoCapitalize="none"
           onChangeText={this._handleCurrentPassword}
+          secureTextEntry={true}
           value={this.props.password}
         />
 
         <TextInput
-          style={[styles.transInput, {marginBottom: 15}]}
-          placeholderTextColor='rgba(255,255,255,0.18)'
-          placeholder='CONFIRM PASSWORD'
+          style={styles.transInput}
+          placeholderTextColor='#88898C'
+          placeholder='Confirm Password'
           autoCorrect={false}
           autoCapitalize="none"
           onChangeText={this._handleCurrentConfirmPassword}
+          secureTextEntry={true}
           value={this.props.passwordConfirm}
         />
 
@@ -175,7 +177,7 @@ export default class Register extends Component {
               underlayColor='transparent'
             >
               <Text style={styles.buttonText}>
-                SUBMIT
+                Submit
               </Text>
             </TouchableHighlight>
           </View>
@@ -188,33 +190,58 @@ export default class Register extends Component {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    backgroundColor: 'rgba(255,255,255,0.18)',
-    borderWidth: 0,
+    // backgroundColor: 'rgba(255,255,255,0.18)',
+    // borderWidth: 0,
     // borderColor: 'rgba(255,255,255,0.2)',
-    borderColor: 'black',
-    borderRadius: 25,
-    justifyContent: 'center',
+    // borderColor: 'black',
+    // borderRadius: 25,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // flexDirection: 'row',
+    // flex: 1,
     alignItems: 'center',
-    flexDirection: 'row',
+    backgroundColor: 'rgba(255,255,255,0.35)',
+    borderColor: 'black',
+    borderWidth: 0,
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   buttonText: {
     // color: 'rgba(255,255,255,0.2)',
-    color: '#986B6C',
-    fontSize: 13,
+    // color: '#986B6C',
+    // fontSize: 13,
+    // fontFamily: 'Helvetica Neue',
+    // fontWeight: 'bold',
+    color: 'rgba(0,0,0,0.3)',
+    fontSize: 16,
     fontFamily: 'Helvetica Neue',
     fontWeight: 'bold',
   },
   transInput: {
     // backgroundColor: 'rgba(255,255,255,0.1)',
-    borderWidth: 1,
-    borderRadius: 25,
-    borderColor: 'rgba(255,255,255,0.18)',
-    height: 45,
-    padding: 15,
+    // borderWidth: 1,
+    // borderRadius: 25,
+    // borderColor: 'rgba(255,255,255,0.18)',
+    // height: 45,
+    // padding: 15,
+    // fontFamily: 'Helvetica Neue',
+    // fontSize: 13,
+    // textAlign: 'center',
+    // fontWeight: 'bold',
+    backgroundColor: 'white',
+    borderColor: 'black',
     fontFamily: 'Helvetica Neue',
     fontSize: 13,
-    textAlign: 'center',
+    fontWeight: '200',
+    height: 45,
+    padding: 15,
+  },
+  titleText: {
+    color: 'black',
+    marginBottom: 10,
+    fontFamily: 'Arial',
+    fontSize: 40,
     fontWeight: 'bold',
   },
 })

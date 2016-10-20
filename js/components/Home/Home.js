@@ -17,6 +17,7 @@ import InputNormal from '../../elements/InputNormal'
 import CustomerCell from '../../elements/CustomerCell'
 import Swiper from 'react-native-swiper'
 import { Actions } from 'react-native-router-flux'
+import Emoji from 'react-native-emoji'
 
 var updating;
 export default class Home extends Component {
@@ -39,7 +40,7 @@ export default class Home extends Component {
   componentWillMount() {
     this.props.updateHomeSeats(1);
     updating = setInterval(this._refreshing, 10000);
-  
+
   }
 
   componentWillUnmount() {
@@ -121,86 +122,79 @@ export default class Home extends Component {
         >
           {/*Slide 1*/}
           <View style={styles.slide1}>
-            <View style={{flex: 3, justifyContent: 'space-between'}}>
+            <View style={{flex: 1, justifyContent: 'space-between'}}>
            {/*<Text>
                 {this.props.store ? this.props.store.name : ""}
               </Text>*/}
-              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 30}}>
+              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 35}}>
                 {this.props.store ? this.props.store.name : null}
               </Text>
-              <View>
-                <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 30}}>
-                  GROUPS AHEAD
-                </Text>
-                <Text style={{fontFamily: 'Helvetica Neue', fontWeight: 'bold', fontSize: 65}}>
-                  {this.props.store ? this.props.store.queue.length + estmin : ""}
-                </Text>
-              </View>
-
+              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 65}}>
+                GROUPS AHEAD
+              </Text>
+              <Text style={{fontFamily: 'Helvetica Neue', fontWeight: 'bold', fontSize: 65}}>
+                {this.props.store ? this.props.store.queue.length + estmin : ""} <Emoji name="family"/>
+              </Text>
+            </View>
+            <View style={{flex: 4, justifyContent: 'flex-end'}}>
               <TextInput
                 keyboardType='phone-pad'
                 maxLength={14}
                 onChangeText={this._handleCurrentPhoneNumber}
-                placeholderTextColor='rgba(255,255,255,0.18)'
-                placeholder='ENTER PHONE #'
-                style={[styles.transInput, {marginBottom: 15}]}
+                placeholderTextColor='#88898C'
+                placeholder='Enter Phone #'
+                style={styles.transInput}
                 value={this.props.homePhoneNumber}
               />
-
+              <View style={{height: 45, flexDirection: 'row'}}>
+                <View style={{flex: 1}}>
+                  <TouchableHighlight
+                    onPress={this._handleNewCustomer}
+                    style={styles.buttonContainer}
+                    underlayColor='transparent'
+                  >
+                    <Text style={styles.buttonText}>
+                      Reserve
+                    </Text>
+                  </TouchableHighlight>
+                </View>
+              </View>
             </View>
+
             <View style={styles.seatsRow}>
-           
-              
-              <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                { this.props.homeSeats > 1 ? 
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                { this.props.homeSeats > 1 ?
                 <TouchableHighlight
                   onPress={this._decrementSeats}
                   underlayColor='transparent'
                 >
                   <Image
-                    source={require('../../../public/assets/img/minus.png')}
+                    source={require('../../../public/assets/img/simpleMinus.png')}
                   />
                 </TouchableHighlight>
                 : null }
               </View>
-              
-              <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+              <View style={{alignItems:'center', justifyContent:'center'}}>
                 <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
                     {this.props.homeSeats}
                 </Text>
               </View>
-             
-                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                 { this.props.homeSeats < 15 ? 
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                 { this.props.homeSeats < 15 ?
                 <TouchableHighlight
                   onPress={this._incrementSeats}
                   underlayColor='transparent'
                 >
                     <Image
-                      source={require('../../../public/assets/img/plusFilled.png')}
+                      source={require('../../../public/assets/img/simplePlus.png')}
                     />
                 </TouchableHighlight>
                 : null}
               </View>
-                
-              
             </View>
-            <View style={{flex:3 , alignItems:'center'}}>
-            <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
-              <View style={{flex: 1}}>
-                <TouchableHighlight
-                  onPress={this._handleNewCustomer}
-                  style={styles.buttonContainer}
-                  underlayColor='transparent'
-                >
-                  <Text style={styles.buttonText}>
-                    RESERVE
-                  </Text>
-                </TouchableHighlight>
-              </View>
-            </View>
-            </View>
+
           </View>
+
           {/*Slide 2*/}
           <View style={styles.slide2}>
             <ListView
@@ -224,32 +218,41 @@ export default class Home extends Component {
 
 var styles = StyleSheet.create({
   buttonContainer: {
-    backgroundColor: 'rgba(255,255,255,0.18)',
-    borderWidth: 0,
+    // backgroundColor: 'rgba(255,255,255,0.18)',
+    // borderWidth: 0,
     // borderColor: 'rgba(255,255,255,0.2)',
-    borderColor: 'black',
-    borderRadius: 25,
-    justifyContent: 'center',
+    // borderColor: 'black',
+    // borderRadius: 25,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // flexDirection: 'row',
+    // flex: 1,
     alignItems: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#F4F3F1',
+    borderColor: 'black',
+    borderWidth: 0,
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   buttonText: {
     // color: 'rgba(255,255,255,0.2)',
-    color: '#986B6C',
-    fontSize: 13,
+    // color: '#986B6C',
+    // fontSize: 13,
+    // fontFamily: 'Helvetica Neue',
+    // fontWeight: 'bold',
+    color: 'rgba(0,0,0,0.3)',
     fontFamily: 'Helvetica Neue',
+    fontSize: 16,
     fontWeight: 'bold',
   },
   wrapper: {
-    backgroundColor: '#986B6C',
+    backgroundColor: '#FFEC56',
     paddingTop: 15,
   },
   slide1: {
-    backgroundColor: '#986B6C',
+    backgroundColor: '#FFEC56',
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
     paddingLeft: 15,
     paddingRight: 15,
   },
@@ -257,17 +260,18 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     flexDirection: 'column',
-    backgroundColor: '#986B6C'
+    backgroundColor: '#FFEC56'
   },
   slide3: {
     flex: 1,
     justifyContent: 'center',
     flexDirection: 'column',
-    backgroundColor: '#986B6C'
+    backgroundColor: '#FFEC56'
   },
   seatsRow:{
-    flex:1,
-    flexDirection:'row'
+    flex: 1,
+    flexDirection:'row',
+    justifyContent: 'flex-end',
   },
   text: {
     color: '#fff',
@@ -276,14 +280,22 @@ var styles = StyleSheet.create({
   },
   transInput: {
     // backgroundColor: 'rgba(255,255,255,0.1)',
-    borderWidth: 2,
-    borderRadius: 25,
-    borderColor: 'rgba(255,255,255,0.18)',
+
+    // borderWidth: 2,
+    // borderRadius: 25,
+    // borderColor: 'rgba(255,255,255,0.18)',
+    // height: 45,
+    // padding: 10,
+    // fontFamily: 'Arial',
+    // fontSize: 19,
+    // textAlign: 'center',
+    // fontWeight: 'bold',
+    backgroundColor: 'white',
+    borderColor: 'black',
+    fontFamily: 'Helvetica Neue',
+    fontSize: 13,
+    fontWeight: '200',
     height: 45,
-    padding: 10,
-    fontFamily: 'Arial',
-    fontSize: 19,
-    textAlign: 'center',
-    fontWeight: 'bold',
+    padding: 15,
   },
 })
