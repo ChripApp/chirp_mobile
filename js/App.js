@@ -30,7 +30,7 @@ export default class App extends Component {
         <RouterWithRedux>
           <Scene key='root'>
             <Scene component={Splash} initial={true} key='splash' title='Splash Page'/>
-            <Scene component={Login} hideNavBar key='login' sceneStyle={{backgroundColor: '#986B6C'}} title='Login Page'/>
+            <Scene component={Login} hideNavBar key='login' sceneStyle={{backgroundColor: '#FFEC56'}} title='Login Page'/>
             <Scene component={Register} hideNavBar={false} key='register' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#986B6C'}}/>
             <Scene key="main" onRight={() => Actions.profile()} navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}}>
               <Scene
@@ -38,7 +38,7 @@ export default class App extends Component {
                 initial={true}
                 key='home'
                 rightTitle='Profile'
-                sceneStyle={{backgroundColor: '#986B6C'}}
+                sceneStyle={{backgroundColor: '#FFEC56'}}
                 type='reset'
               />
               <Scene

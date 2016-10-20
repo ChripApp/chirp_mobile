@@ -155,6 +155,7 @@ export default class Home extends Component {
                 { this.props.homeSeats > 1 ? 
                 <TouchableHighlight
                   onPress={this._decrementSeats}
+                  underlayColor='transparent'
                 >
                   <Image
                     source={require('../../../public/assets/img/minus.png')}
@@ -173,6 +174,7 @@ export default class Home extends Component {
                  { this.props.homeSeats < 15 ? 
                 <TouchableHighlight
                   onPress={this._incrementSeats}
+                  underlayColor='transparent'
                 >
                     <Image
                       source={require('../../../public/assets/img/plusFilled.png')}
