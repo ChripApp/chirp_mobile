@@ -76,11 +76,15 @@ export default class Login extends Component {
     }
 
     this.props.login(this.props.phoneNumber, this.props.password)
-    
-    
+
+
   }
 
   render() {
+    // <TextInput
+    //   style={styles.transInput}
+    //   placeholderTextColor='rgba(255,255,255,0.18)'
+
     return (
       <View style={{flex: 1, padding: 45}}>
       {/*<Text>
@@ -92,10 +96,9 @@ export default class Login extends Component {
             source={require('../../../public/assets/img/chirplogo.png')}
             style={styles.chirpImg}
           />
-          {/* rgba(255,255,255,0.18) <Text style={styles.chirpText}>Chirp</Text>*/}
+          <Text style={styles.chirpText}>CHIRP</Text>
           <TextInput
             style={styles.transInput}
-            placeholderTextColor='rgba(255,255,255,0.18)'
             placeholderTextColor='#88898C'
             placeholder='Enter Phone #'
             maxLength={14}
@@ -110,6 +113,7 @@ export default class Login extends Component {
             autoCapitalize="none"
             autoCorrect={false}
             onChangeText={this._handleCurrentPassword}
+            secureTextEntry={true}
             value={this.props.password}
           />
         </View>
@@ -152,9 +156,8 @@ const styles = StyleSheet.create({
   registerButtonContainer: {
     // backgroundColor: 'rgba(255,255,255,0.18)',
     // backgroundColor: '#ADDCE9',
-// backgroundColor: '#F4F3F1',
-backgroundColor: 'rgba(255,255,255,0.35)',
-
+    // backgroundColor: '#F4F3F1',
+    backgroundColor: 'rgba(255,255,255,0.35)',
     // backgroundColor: '#FEC89A',
     borderWidth: 0,
     // borderColor: 'rgba(255,255,255,0.2)',
@@ -168,33 +171,35 @@ backgroundColor: 'rgba(255,255,255,0.35)',
   loginButtonContainer: {
     // backgroundColor: 'rgba(255,255,255,0.18)',
     // backgroundColor: 'rgba(255,255,255,0.35)',
-    backgroundColor: '#F4F3F1',
-
     // backgroundColor: '#F4F3F1',
-    borderWidth: 0,
     // borderColor: 'rgba(255,255,255,0.2)',
-    borderColor: 'black',
     // borderRadius: 25,
-    justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#F4F3F1',
+    borderColor: 'black',
+    borderWidth: 0,
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   buttonText: {
     // color: 'rgba(255,255,255,0.2)',
     // color: '#986B6C',
     color: 'rgba(0,0,0,0.3)',
-    fontSize: 16,
     fontFamily: 'Helvetica Neue',
+    fontSize: 16,
     fontWeight: 'bold',
   },
   chirpText: {
     color: 'black',
-    fontSize: 20,
+    marginBottom: 10,
+    fontFamily: 'Arial',
+    fontSize: 90,
+    fontWeight: 'bold',
   },
   chirpImg: {
     height: 62.5,
-    marginBottom: 35,
+    marginBottom: 20,
     width: 85,
   },
   transInput: {
@@ -202,13 +207,12 @@ backgroundColor: 'rgba(255,255,255,0.35)',
     // borderWidth: 1,
     // borderRadius: 25,
     // borderColor: 'rgba(255,255,255,0.18)',
+    backgroundColor: 'white',
     borderColor: 'black',
-    height: 45,
-    padding: 15,
     fontFamily: 'Helvetica Neue',
     fontSize: 13,
-
     fontWeight: '200',
-    backgroundColor: 'white',
+    height: 45,
+    padding: 15,
   },
 })

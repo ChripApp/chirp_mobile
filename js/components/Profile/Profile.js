@@ -101,20 +101,21 @@ export default class Profile extends Component {
     console.log(this.props);
     if(!this.state.verified)
       return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>
-          Verification
+      <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.titleText}>
+          To continue, please enter your password
         </Text>
         <TextInput
-          style={[styles.transInput, {marginBottom: 15}]}
-          placeholderTextColor='rgba(255,255,255,0.18)'
-          placeholder='PASSWORD'
           autoCapitalize="none"
           autoCorrect={false}
           onChangeText={this._handleCurrentPassword}
+          placeholderTextColor='#88898C'
+          placeholder='Enter Password'
+          secureTextEntry={true}
+          style={styles.transInput}
           value={this.props.verificationPassword}
         />
-        <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
+        <View style={{height: 45, flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               <TouchableHighlight
                 onPress={this._verify}
@@ -122,7 +123,7 @@ export default class Profile extends Component {
                 underlayColor='transparent'
               >
                 <Text style={styles.buttonText}>
-                  VERIFY
+                  Verify
                 </Text>
               </TouchableHighlight>
           </View>
@@ -132,23 +133,23 @@ export default class Profile extends Component {
     else
       return (
 
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
         <TextInput
-          style={[styles.transInput, {marginBottom: 15}]}
-          placeholderTextColor='rgba(255,255,255,0.18)'
-          placeholder='STORE NAME'
+          style={styles.transInput}
+          placeholderTextColor='#88898C'
+          placeholder='Enter Store Name'
           autoCorrect={false}
           onChangeText={this._handleCurrentStoreName}
           value={this.props.storename}
         />
         <TextInput
-          style={[styles.transInput, {marginBottom: 15}]}
-          placeholderTextColor='rgba(255,255,255,0.18)'
-          placeholder='EST MIN PER CUSTOMER'
+          style={styles.transInput}
+          placeholderTextColor='#88898C'
+          placeholder='Enter Estimated Wait Time:  Min/Customer'
           onChangeText={this._handleCurrentEstMin}
           value={this.props.estmin}
         />
-        <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
+        <View style={{height: 45, marginBottom: 45, flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               <TouchableHighlight
                 onPress={this._updateStore}
@@ -156,12 +157,12 @@ export default class Profile extends Component {
                 underlayColor='transparent'
               >
                 <Text style={styles.buttonText}>
-                  UPDATE
+                  Update Info
                 </Text>
               </TouchableHighlight>
           </View>
         </View>
-        <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
+        <View style={{height: 45, flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               <TouchableHighlight
                 onPress={this._reset}
@@ -169,20 +170,20 @@ export default class Profile extends Component {
                 underlayColor='transparent'
               >
                 <Text style={styles.buttonText}>
-                  RESET
+                  Reset Store
                 </Text>
               </TouchableHighlight>
           </View>
         </View>
-        <View style={{height: 45, flexDirection: 'row', marginBottom: 15}}>
+        <View style={{height: 45, flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               <TouchableHighlight
                 onPress={this._logout}
-                style={styles.buttonContainer}
+                style={styles.logoutButtonContainer}
                 underlayColor='transparent'
               >
                 <Text style={styles.buttonText}>
-                  LOGOUT
+                  Log Out
                 </Text>
               </TouchableHighlight>
           </View>
@@ -195,33 +196,76 @@ export default class Profile extends Component {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    backgroundColor: 'rgba(255,255,255,0.18)',
-    borderWidth: 0,
+    // backgroundColor: 'rgba(255,255,255,0.18)',
+    // borderWidth: 0,
     // borderColor: 'rgba(255,255,255,0.2)',
-    borderColor: 'black',
-    borderRadius: 25,
-    justifyContent: 'center',
+    // borderColor: 'black',
+    // borderRadius: 25,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // flexDirection: 'row',
+    // flex: 1,
     alignItems: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#F4F3F1',
+    borderColor: 'black',
+    borderWidth: 0,
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  logoutButtonContainer: {
+    // backgroundColor: 'rgba(255,255,255,0.18)',
+    // borderWidth: 0,
+    // borderColor: 'rgba(255,255,255,0.2)',
+    // borderColor: 'black',
+    // borderRadius: 25,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // flexDirection: 'row',
+    // flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.35)',
+    borderColor: 'black',
+    borderWidth: 0,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   buttonText: {
     // color: 'rgba(255,255,255,0.2)',
-    color: '#986B6C',
-    fontSize: 13,
+    // color: '#986B6C',
+    // fontSize: 13,
+    // fontFamily: 'Helvetica Neue',
+    // fontWeight: 'bold',
+    color: 'rgba(0,0,0,0.3)',
     fontFamily: 'Helvetica Neue',
+    fontSize: 16,
     fontWeight: 'bold',
   },
   transInput: {
     // backgroundColor: 'rgba(255,255,255,0.1)',
-    borderWidth: 1,
-    borderRadius: 25,
-    borderColor: 'rgba(255,255,255,0.18)',
-    height: 45,
-    padding: 15,
+    // borderWidth: 1,
+    // borderRadius: 25,
+    // borderColor: 'rgba(255,255,255,0.18)',
+    // height: 45,
+    // padding: 15,
+    // fontFamily: 'Helvetica Neue',
+    // fontSize: 13,
+    // textAlign: 'center',
+    // fontWeight: 'bold',
+    backgroundColor: 'white',
+    borderColor: 'black',
     fontFamily: 'Helvetica Neue',
     fontSize: 13,
-    textAlign: 'center',
+    fontWeight: '200',
+    height: 45,
+    padding: 15,
+  },
+  titleText: {
+    color: 'black',
+    marginBottom: 10,
+    fontFamily: 'Arial',
+    fontSize: 40,
     fontWeight: 'bold',
   },
 })

@@ -24,15 +24,16 @@ const store = configureStore()
 export default class App extends Component {
 
   render() {
+    //  sceneStyle={{backgroundColor: '#986B6C'}}
     console.log(this.props);
     return (
       <Provider store={store}>
         <RouterWithRedux>
-          <Scene key='root'>
+          <Scene key='root' barButtonIconStyle={{ tintColor: 'black' }}>
             <Scene component={Splash} initial={true} key='splash' title='Splash Page'/>
-            <Scene component={Login} hideNavBar key='login' sceneStyle={{backgroundColor: '#FFEC56'}} title='Login Page'/>
-            <Scene component={Register} hideNavBar={false} key='register' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#986B6C'}}/>
-            <Scene key="main" onRight={() => Actions.profile()} navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}}>
+            <Scene component={Login} hideNavBar key='login' sceneStyle={{backgroundColor: '#FFEC56'}}/>
+            <Scene component={Register} hideNavBar={false} key='register' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#FFEC56'}} backButtonTextStyle={{color: 'black'}}/>
+            <Scene key="main" onRight={() => Actions.profile()} navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} barButtonIconStyle={{ tintColor: 'black' }}>
               <Scene
                 component={Home}
                 initial={true}
@@ -45,7 +46,7 @@ export default class App extends Component {
                 component={Profile}
                 direction='vertical'
                 key='profile'
-                sceneStyle={{backgroundColor: '#986B6C'}}
+                sceneStyle={{backgroundColor: '#FFEC56'}}
               />
             </Scene>
           </Scene>
