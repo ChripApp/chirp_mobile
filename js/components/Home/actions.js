@@ -38,7 +38,7 @@ export const updateStore = (store) => {
    }
 
   return dispatch => {
-  fetch('http://localhost:8080/store/getstore', request)
+  fetch('http://' + actionTypes.LOCAL_IP + ':8080/store/getstore', request)
   .then((response) => response.json())
   .then((responseJson) => {
 	    if(responseJson.success){
@@ -80,7 +80,7 @@ export const enqueue = (store, phoneNumber, seats) => {
   }
 
   return dispatch => {
-  fetch('http://localhost:8080/store/enqueue', request)
+  fetch('http://' + actionTypes.LOCAL_IP + ':8080/store/enqueue', request)
   .then((response) => response.json())
   .then((responseJson) => {
     if(responseJson.success){
@@ -138,7 +138,7 @@ export const dequeue = (store, customer, phoneNumber, seats) => {
   }
 
   return dispatch => {
-  fetch('http://localhost:8080/store/dequeue', request)
+  fetch('http://' + actionTypes.LOCAL_IP + ':8080/store/dequeue', request)
   .then((response) => response.json())
   .then((responseJson) => {
     console.log(responseJson);

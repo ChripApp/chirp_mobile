@@ -26,6 +26,7 @@ export const login = (phoneNumber, password) => {
   phoneNumber = phoneNumber.join("");
   phoneNumber = '+1' + phoneNumber;
 
+
   var requestHeader = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -41,9 +42,9 @@ export const login = (phoneNumber, password) => {
      headers: requestHeader,
      body: JSON.stringify(requestBody)
    }
-
+   console.log(actionTypes.LOCAL_IP);
   return dispatch => {
-  fetch('http://localhost:8080/user/signin', request)
+  fetch('http://' + actionTypes.LOCAL_IP + ':8080/user/signin', request)
   .then((response) => response.json())
   .then((responseJson) => {
     //Login Success
@@ -101,7 +102,7 @@ export const autoLogin = (token) => {
    }
 
   return dispatch => {
-   fetch('http://localhost:8080/user/autoSignin', request)
+   fetch('http://' + actionTypes.LOCAL_IP + ':8080/user/autoSignin', request)
   .then((response) => response.json())
   .then((responseJson) => {
       if(responseJson.success){

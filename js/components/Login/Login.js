@@ -91,12 +91,16 @@ export default class Login extends Component {
           {this.props.phoneNumber}
           {this.props.password}
         </Text> */}
-        <View style={{flex: 1.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+        <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
           <Image
             source={require('../../../public/assets/img/chirplogo.png')}
             style={styles.chirpImg}
           />
           <Text style={styles.chirpText}>CHIRP</Text>
+          
+        </View>
+
+        <View style={{flex: 1, justifyContent: 'flex-start'}}>
           <TextInput
             style={styles.transInput}
             placeholderTextColor='#88898C'
@@ -116,9 +120,6 @@ export default class Login extends Component {
             secureTextEntry={true}
             value={this.props.password}
           />
-        </View>
-
-        <View style={{flex: 1, justifyContent: 'flex-start'}}>
           <View style={{height: 45, flexDirection: 'row',}}>
             <View style={{flex: 1}}>
               <TouchableHighlight
@@ -207,6 +208,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     // borderRadius: 25,
     // borderColor: 'rgba(255,255,255,0.18)',
+
     backgroundColor: 'white',
     borderColor: 'black',
     fontFamily: 'Helvetica Neue',

@@ -1,5 +1,6 @@
 'use strict';
 
+import * as actionTypes from '../actionTypes'
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -62,7 +63,7 @@ class customerCell extends Component {
 
   _loadCustomer(data){
   	this.state.customerId = data.customer;
-  	fetch('http://localhost:8080/store/getcustomer', {
+  	fetch('http://' + actionTypes.LOCAL_IP + ':8080/store/getcustomer', {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',

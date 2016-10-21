@@ -108,8 +108,11 @@ export default class Home extends Component {
 
   render() {
     var estmin = '';
-    if(this.props.store != undefined && this.props.store.estmin && this.props.store.waiting){
-      estmin = " (" + (this.props.store.estmin * this.props.store.waiting) + " MIN)";
+    if(this.props.store != undefined && this.props.store.estmin){
+      if(this.props.store.waiting == undefined)
+        estmin = " (0" + " MIN)";
+      else
+        estmin = " (" + (this.props.store.estmin * this.props.store.waiting) + " MIN)";
     }
     console.log(this.props);
     return (
@@ -161,8 +164,11 @@ export default class Home extends Component {
               </View>
             </View>
 
+            
             <View style={styles.seatsRow}>
-              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+              </View>
+              <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 { this.props.homeSeats > 1 ?
                 <TouchableHighlight
                   onPress={this._decrementSeats}
@@ -174,12 +180,12 @@ export default class Home extends Component {
                 </TouchableHighlight>
                 : null }
               </View>
-              <View style={{alignItems:'center', justifyContent:'center'}}>
+              <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
                 <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
                     {this.props.homeSeats}
                 </Text>
               </View>
-              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                  { this.props.homeSeats < 15 ?
                 <TouchableHighlight
                   onPress={this._incrementSeats}
@@ -194,7 +200,7 @@ export default class Home extends Component {
             </View>
 
           </View>
-
+          
           {/*Slide 2*/}
           <View style={styles.slide2}>
             <ListView
@@ -270,8 +276,8 @@ var styles = StyleSheet.create({
   },
   seatsRow:{
     flex: 1,
-    flexDirection:'row',
-    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
   },
   text: {
     color: '#fff',

@@ -37,7 +37,7 @@ export const verify = (phoneNumber , password) => {
      body: JSON.stringify(requestBody)
    }
   return dispatch => {
-  fetch('http://localhost:8080/user/verify', request)
+  fetch('http://' + actionTypes.LOCAL_IP + ':8080/user/verify', request)
   .then((response) => response.json())
   .then((responseJson) => {
       if(responseJson.success){
@@ -89,7 +89,7 @@ export const reset = (store) => {
    }
 
   return dispatch => {
-  fetch('http://localhost:8080/store/reset', request)
+  fetch('http://' + actionTypes.LOCAL_IP + ':8080/store/reset', request)
   .then((response) => response.json())
   .then((responseJson) => {
       if(responseJson.success){
@@ -149,7 +149,7 @@ export const updateProfileStore = (store, name, estmin) => {
    }
 
   return dispatch => {
-  fetch('http://localhost:8080/store/update', request)
+  fetch('http://' + actionTypes.LOCAL_IP + ':8080/store/update', request)
   .then((response) => response.json())
   .then((responseJson) => {
 	    if(responseJson.success){

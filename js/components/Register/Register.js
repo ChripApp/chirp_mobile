@@ -108,81 +108,76 @@ export default class Register extends Component {
 
   render() {
     return (
-      <View style={{alignItems: 'center', flex: 1, justifyContent: 'center', padding: 45}}>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', padding: 45}}>
 
         <Text style={styles.titleText}>
           Register
         </Text>
-        <TextInput
-          style={styles.transInput}
-          placeholderTextColor='#88898C'
-          placeholder='Phone #'
-          maxLength={14}
-          onChangeText={this._handleCurrentPhoneNumber}
-          value={this.props.phoneNumber}
-          keyboardType='phone-pad'
-        />
-
-        <TextInput
-          style={styles.transInput}
-          placeholderTextColor='#88898C'
-          placeholder='First Name'
-          autoCorrect={false}
-          onChangeText={this._handleCurrentFirstName}
-          value={this.props.firstName}
-        />
-
-        <TextInput
-          style={styles.transInput}
-          placeholderTextColor='#88898C'
-          placeholder='Last Name'
-          autoCorrect={false}
-          onChangeText={this._handleCurrentLastName}
-          value={this.props.lastName}
-        />
-
-        <TextInput
-          style={styles.transInput}
-          placeholderTextColor='#88898C'
-          placeholder='Password'
-          autoCorrect={false}
-          autoCapitalize="none"
-          onChangeText={this._handleCurrentPassword}
-          secureTextEntry={true}
-          value={this.props.password}
-        />
-
-        <TextInput
-          style={styles.transInput}
-          placeholderTextColor='#88898C'
-          placeholder='Confirm Password'
-          autoCorrect={false}
-          autoCapitalize="none"
-          onChangeText={this._handleCurrentConfirmPassword}
-          secureTextEntry={true}
-          value={this.props.passwordConfirm}
-        />
-
-        {/*<InputNormal
-            placeholder='Store Name'
-            onChangeText={this._handleCurrentStoreName}
-            value={this.props.storeName}
-          />*/}
-
-        <View style={{height: 45, flexDirection: 'row'}}>
+      
+        <View style={{flexDirection: 'row'}}>
           <View style={{flex: 1}}>
-            <TouchableHighlight
-              onPress={this._register}
-              style={styles.buttonContainer}
-              underlayColor='transparent'
-            >
-              <Text style={styles.buttonText}>
-                Submit
-              </Text>
-            </TouchableHighlight>
+            <TextInput
+              style={styles.transInput}
+              placeholderTextColor='#88898C'
+              placeholder='Phone #'
+              maxLength={14}
+              onChangeText={this._handleCurrentPhoneNumber}
+              value={this.props.phoneNumber}
+              keyboardType='phone-pad'
+            />
+
+            <TextInput
+              style={styles.transInput}
+              placeholderTextColor='#88898C'
+              placeholder='First Name'
+              autoCorrect={false}
+              onChangeText={this._handleCurrentFirstName}
+              value={this.props.firstName}
+            />
+
+            <TextInput
+              style={styles.transInput}
+              placeholderTextColor='#88898C'
+              placeholder='Last Name'
+              autoCorrect={false}
+              onChangeText={this._handleCurrentLastName}
+              value={this.props.lastName}
+            />
+
+            <TextInput
+              style={styles.transInput}
+              placeholderTextColor='#88898C'
+              placeholder='Password'
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={this._handleCurrentPassword}
+              secureTextEntry={true}
+              value={this.props.password}
+            />
+
+            <TextInput
+              style={styles.transInput}
+              placeholderTextColor='#88898C'
+              placeholder='Confirm Password'
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={this._handleCurrentConfirmPassword}
+              secureTextEntry={true}
+              value={this.props.passwordConfirm}
+            />
+            <View style={{height: 45}}>
+              <TouchableHighlight
+                onPress={this._register}
+                style={styles.buttonContainer}
+                underlayColor='transparent'
+              >
+                <Text style={styles.buttonText}>
+                  Submit
+                </Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
-
       </View>
     )
   }

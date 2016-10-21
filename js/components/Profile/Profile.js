@@ -71,7 +71,6 @@ export default class Profile extends Component {
   }
 
   _verify() {
-    console.log(this.props);
     if(this.props.verificationPassword == undefined){
       Alert.alert(
         "Sorry",
@@ -94,34 +93,35 @@ export default class Profile extends Component {
   }
 
   render() {
-    console.log(this.props);
     if(!this.props.verified)
       return (
       <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
         <Text style={styles.titleText}>
           To continue, please enter your password
         </Text>
-        <TextInput
-          autoCapitalize="none"
-          autoCorrect={false}
-          onChangeText={this._handleCurrentPassword}
-          placeholderTextColor='#88898C'
-          placeholder='Enter Password'
-          secureTextEntry={true}
-          style={styles.transInput}
-          value={this.props.verificationPassword}
-        />
-        <View style={{height: 45, flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row'}}>
             <View style={{flex: 1}}>
-              <TouchableHighlight
-                onPress={this._verify}
-                style={styles.buttonContainer}
-                underlayColor='transparent'
-              >
-                <Text style={styles.buttonText}>
-                  Verify
-                </Text>
-              </TouchableHighlight>
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={this._handleCurrentPassword}
+                placeholderTextColor='#88898C'
+                placeholder='Enter Password'
+                secureTextEntry={true}
+                style={styles.transInput}
+                value={this.props.verificationPassword}
+              />
+              <View style={{height:45}}>
+                <TouchableHighlight
+                  onPress={this._verify}
+                  style={styles.buttonContainer}
+                  underlayColor='transparent'
+                >
+                  <Text style={styles.buttonText}>
+                    Verify
+                  </Text>
+                </TouchableHighlight>
+              </View>
           </View>
         </View>
       </View>
@@ -130,32 +130,34 @@ export default class Profile extends Component {
       return (
 
       <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
-        <TextInput
-          style={styles.transInput}
-          placeholderTextColor='#88898C'
-          placeholder='Enter Store Name'
-          autoCorrect={false}
-          onChangeText={this._handleCurrentStoreName}
-          value={this.props.storename}
-        />
-        <TextInput
-          style={styles.transInput}
-          placeholderTextColor='#88898C'
-          placeholder='Enter Estimated Wait Time:  Min/Customer'
-          onChangeText={this._handleCurrentEstMin}
-          value={this.props.estmin}
-        />
-        <View style={{height: 45, marginBottom: 45, flexDirection: 'row'}}>
+        <View style={{marginBottom: 45, flexDirection: 'row'}}>
             <View style={{flex: 1}}>
-              <TouchableHighlight
-                onPress={this._updateStore}
-                style={styles.buttonContainer}
-                underlayColor='transparent'
-              >
-                <Text style={styles.buttonText}>
-                  Update Info
-                </Text>
-              </TouchableHighlight>
+              <TextInput
+                style={styles.transInput}
+                placeholderTextColor='#88898C'
+                placeholder='Enter Store Name'
+                autoCorrect={false}
+                onChangeText={this._handleCurrentStoreName}
+                value={this.props.storename}
+              />
+              <TextInput
+                style={styles.transInput}
+                placeholderTextColor='#88898C'
+                placeholder='Enter Estimated Wait Time:  Min/Customer'
+                onChangeText={this._handleCurrentEstMin}
+                value={this.props.estmin}
+              />
+              <View style={{height:45}}>
+                <TouchableHighlight
+                  onPress={this._updateStore}
+                  style={styles.buttonContainer}
+                  underlayColor='transparent'
+                >
+                  <Text style={styles.buttonText}>
+                    Update Info
+                  </Text>
+                </TouchableHighlight>
+              </View>
           </View>
         </View>
         <View style={{height: 45, flexDirection: 'row'}}>
