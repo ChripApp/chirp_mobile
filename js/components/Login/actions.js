@@ -42,12 +42,13 @@ export const login = (phoneNumber, password) => {
      headers: requestHeader,
      body: JSON.stringify(requestBody)
    }
-   console.log(actionTypes.LOCAL_IP);
+   console.log('http://' + actionTypes.LOCAL_IP + '/user/signin/');
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + ':8080/user/signin', request)
+  fetch('http://' + actionTypes.LOCAL_IP + '/user/signin/', request)
   .then((response) => response.json())
   .then((responseJson) => {
     //Login Success
+    console.log(responseJson);
     if(responseJson.success){
       AsyncStorage.setItem('token', responseJson.token);
       Actions.main()
@@ -69,6 +70,7 @@ export const login = (phoneNumber, password) => {
     }
   })
   .catch((error) => {
+    console.log(error);
     switch(error.message){
       case 'phoneNumberNotExist':
         okAlert('Phone Number Not Exist', 'Check your number buddy');
@@ -102,9 +104,10 @@ export const autoLogin = (token) => {
    }
 
   return dispatch => {
-   fetch('http://' + actionTypes.LOCAL_IP + ':8080/user/autoSignin', request)
+   fetch('http://' + actionTypes.LOCAL_IP + '/user/autoSignin', request)
   .then((response) => response.json())
   .then((responseJson) => {
+      console.log(responseJson);
       if(responseJson.success){
         AsyncStorage.setItem('token', responseJson.token);
         dispatch({type: actionTypes.LOGIN_SUCCESS})

@@ -42,9 +42,10 @@ export const register = (phoneNumber, firstName, lastName, password) => {
    }
 
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + ':8080/user/signup', request)
+  fetch('http://' + actionTypes.LOCAL_IP + '/user/signup', request)
   .then((response) => response.json())
   .then((responseJson) => {
+      console.log(responseJson);
       if(responseJson.success){
         AsyncStorage.setItem('token', responseJson.token);
         Actions.main()

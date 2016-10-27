@@ -31,5 +31,9 @@ export const UPDATE_PROFILE_PASSWORD = 'UPDATE_PROFILE_PASSWORD'
 
 //local IP
 
-export const LOCAL_IP = 'localhost'
+export const LOCAL_IP = '54.218.16.211:8081';
+//'192.168.0.4:8080';
+//'54.218.16.211:8081';
+//'172.20.10.4:8080'
+//'54.218.16.211:8081'
 //'10.0.1.102'
