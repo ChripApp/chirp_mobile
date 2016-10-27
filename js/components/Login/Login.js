@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     // height: 62.5,
     // marginBottom: 20,
     // width: 85,
-    height: 79,
+    height: 78,
     marginBottom: 20,
     width: 85,
   },
