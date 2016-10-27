@@ -93,11 +93,11 @@ export default class Login extends Component {
         </Text> */}
         <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
           <Image
-            source={require('../../../public/assets/img/chirplogo.png')}
+            source={require('../../../public/assets/img/chirpLogoV2.1.png')}
             style={styles.chirpImg}
           />
           <Text style={styles.chirpText}>CHIRP</Text>
-          
+
         </View>
 
         <View style={{flex: 1, justifyContent: 'flex-start'}}>
@@ -199,7 +199,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   chirpImg: {
-    height: 62.5,
+    // height: 62.5,
+    // marginBottom: 20,
+    // width: 85,
+    height: 79,
     marginBottom: 20,
     width: 85,
   },
