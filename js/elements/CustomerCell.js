@@ -35,7 +35,7 @@ class customerCell extends Component {
 
   _timeElapsed(){
 	var startTime = new Date();
-	
+
 	var endTime = this.state.time;
 	var timeDiff = startTime - endTime;
 
@@ -50,13 +50,13 @@ class customerCell extends Component {
 
 	var returnText = "";
 	if(days == 0 && hours == 0 && minutes == 0){
-		returnText = seconds + " seconds ago";
+		returnText = seconds + " Sec Ago";
 	}else if(days == 0 && hours == 0){
-		returnText = minutes + " minutes ago";
+		returnText = minutes + " Min Ago";
 	}else if(days == 0){
-		returnText = hours + " hours " + minutes  + " minutes ago";
+		returnText = hours + " Hrs " + minutes  + " Min Ago";
 	}else{
-		returnText = days + " days ago";
+		returnText = days + " Days Ago";
 	}
 	return returnText;
   }
@@ -80,7 +80,7 @@ class customerCell extends Component {
 		     	seats: responseJson.customer.seats,
 		     });
 	  	 }
-	     
+
 	   })
 	  .catch((error) => {
 	    console.error(error);
@@ -105,15 +105,51 @@ class customerCell extends Component {
   render() {
   	var ago = this._timeElapsed();
     return (
-
-      <View>
-      	<Text> {this.state.phoneNumber} </Text>
-      	<Text> {this.state.seats} Seats </Text>
-      	<Text> {ago} </Text>
-      	{this.props.noRemove ? null : <TouchableHighlight onPress={this._dequeue}><Text> Remove </Text></TouchableHighlight>}
+      <View style={styles.container}>
+        <View style={styles.rowContainer}>
+          	<Text style={styles.infoText}> {this.state.seats} Seats </Text>
+            <Text style={styles.infoText}> {this.state.phoneNumber} </Text>
+          	<Text style={styles.infoText}> {ago} </Text>
+            {this.props.noRemove ?
+              null
+            :
+              <TouchableHighlight
+                onPress={this._dequeue}
+                underlayColor='#transparent'
+              >
+                <Text style={styles.chirpButtonText}>CHIRP!</Text>
+              </TouchableHighlight>
+            }
+        </View>
       </View>
-    );
+    )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  // textContainer: {
+  //   flex: 1,
+  //   flexDirection: 'column'
+  // },
+  rowContainer: {
+    padding: 15,
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  chirpButtonText: {
+    fontFamily: 'Arial',
+    fontSize: 70,
+    fontWeight: 'bold',
+    color: 'rgba(0,0,0,0.3)',
+  },
+  infoText: {
+    fontFamily: 'Arial',
+    fontSize: 40,
+    fontWeight: 'bold',
+  }
+})
 
 export default customerCell

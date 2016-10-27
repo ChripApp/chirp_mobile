@@ -111,9 +111,9 @@ export default class Home extends Component {
     var estmin = '';
     if(this.props.store != undefined && this.props.store.estmin){
       if(this.props.store.waiting == undefined)
-        estmin = " (0" + " MIN)";
+        estmin = "0" + " Min";
       else
-        estmin = " (" + (this.props.store.estmin * this.props.store.waiting) + " MIN)";
+        estmin = "" + (this.props.store.estmin * this.props.store.waiting) + " Min";
     }
     console.log(this.props);
     return (
@@ -130,14 +130,14 @@ export default class Home extends Component {
            {/*<Text>
                 {this.props.store ? this.props.store.name : ""}
               </Text>*/}
-              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 35}}>
+              <Text style={{color: 'white', fontFamily: 'Arial', fontWeight: 'bold', fontSize: 35}}>
                 {this.props.store ? this.props.store.name : null}
               </Text>
-              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 65}}>
-                GROUPS AHEAD
+              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 70}}>
+                Groups Ahead {this.props.store ? this.props.store.queue.length : ""}
               </Text>
-              <Text style={{fontFamily: 'Helvetica Neue', fontWeight: 'bold', fontSize: 65}}>
-                {this.props.store ? this.props.store.queue.length + estmin : ""} <Emoji name="family"/>
+              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 70, color: 'rgba(0,0,0,0.3)'}}>
+                {this.props.store ? estmin + ' Wait' : ""}
               </Text>
             </View>
             <View style={{flex: 4, justifyContent: 'flex-end'}}>
@@ -165,10 +165,9 @@ export default class Home extends Component {
               </View>
             </View>
 
-            
             <View style={styles.seatsRow}>
-              <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
-              </View>
+              <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}></View>
+
               <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 { this.props.homeSeats > 1 ?
                 <TouchableHighlight
@@ -181,11 +180,13 @@ export default class Home extends Component {
                 </TouchableHighlight>
                 : null }
               </View>
+
               <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
                 <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
                     {this.props.homeSeats}
                 </Text>
               </View>
+
               <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                  { this.props.homeSeats < 15 ?
                 <TouchableHighlight
@@ -199,11 +200,13 @@ export default class Home extends Component {
                 : null}
               </View>
             </View>
-
           </View>
-          
+
           {/*Slide 2*/}
           <View style={styles.slide2}>
+            <View style={{paddingLeft: 15, paddingRight: 15, backgroundColor: '#FFEC56'}}>
+              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 35, color: 'white'}}>Waitlist</Text>
+            </View>
             <ListView
               dataSource={this.props.store ? new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.store.queue) : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([])}
               enableEmptySections={true}
@@ -212,6 +215,9 @@ export default class Home extends Component {
           </View>
           {/*Slide 3*/}
           <View style={styles.slide3}>
+            <View style={{paddingLeft: 15, paddingRight: 15, backgroundColor: '#FFEC56'}}>
+              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 35, color: 'white'}}>Customers</Text>
+            </View>
             <ListView
               dataSource={this.props.store && this.props.store.doneQueue ? new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.store.doneQueue) : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([])}
               enableEmptySections={true}
@@ -264,21 +270,16 @@ var styles = StyleSheet.create({
     paddingRight: 15,
   },
   slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'column',
-    backgroundColor: '#FFEC56'
+    backgroundColor: '#FFEC56',
   },
   slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'column',
-    backgroundColor: '#FFEC56'
+    backgroundColor: '#FFEC56',
   },
   seatsRow:{
     flex: 1,
     flexDirection: 'row',
     alignSelf: 'flex-end',
+    paddingBottom: 30,
   },
   text: {
     color: '#fff',
