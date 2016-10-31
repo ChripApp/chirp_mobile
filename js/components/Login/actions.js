@@ -44,7 +44,7 @@ export const login = (phoneNumber, password) => {
    }
    console.log(actionTypes.LOCAL_IP + '/user/signin/');
   return dispatch => {
-  fetch('https://' + actionTypes.LOCAL_IP + '/user/signin/', request)
+  fetch('http://' + actionTypes.LOCAL_IP + '/user/signin/', request)
   .then((response) => response.json())
   .then((responseJson) => {
     //Login Success
