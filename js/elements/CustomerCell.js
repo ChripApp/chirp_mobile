@@ -66,7 +66,7 @@ class customerCell extends Component {
 
   _loadCustomer(data){
   	this.state.customerId = data.customer;
-  	fetch('http://' + actionTypes.LOCAL_IP + '/store/getcustomer', {
+  	fetch(actionTypes.LOCAL_IP + '/store/getcustomer', {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',

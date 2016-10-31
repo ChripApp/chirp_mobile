@@ -78,22 +78,23 @@ export default class Manage extends Component {
 
   render() {
     return (
-        <View style={styles.slide1}>
+        <View style={styles.container}>
+          <View style={{height: 20}}></View>
           <View style={{flex:1, alignItems: 'flex-end'}}>
             <View style={{flex: 1, flexDirection: 'row'}}>
-              <TouchableHighlight
-                  onPress={Actions.mode.bind(this, {type: "reset"})}
-                  underlayColor='transparent'
-                  style={{paddingRight: 10}}
-                >
-                <Text style={{fontSize: 40}}><Emoji name="left_right_arrow"/></Text>
-              </TouchableHighlight>
               <TouchableHighlight
                   onPress={Actions.profile.bind(this, {type: "reset"})}
                   underlayColor='transparent'
                   style={{paddingRight: 10}}
                 >
                 <Text style={{fontSize: 40}}><Emoji name="gear"/></Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                  onPress={Actions.mode.bind(this, {type: "reset"})}
+                  underlayColor='transparent'
+                  style={{paddingRight: 10}}
+                >
+                <Text style={{fontSize: 40}}><Emoji name="heavy_multiplication_x"/></Text>
               </TouchableHighlight>
             </View>
             <Tabs selected={this.state.page} style={{backgroundColor:'transparent', flex:1}}
@@ -165,11 +166,9 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFEC56',
     paddingTop: 15,
   },
-  slide1: {
+  container: {
     backgroundColor: '#FFEC56',
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15
   },
   text: {
     color: '#fff',

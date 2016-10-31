@@ -45,6 +45,15 @@ export default class Profile extends Component {
         ]
       );
       return;
+    }else if(this.props.user == undefined){
+      Alert.alert(
+        "Sorry",
+        "Please try again in one minute",
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+        ]
+      );
+      return;
     }
     this.props.verify(this.props.user.phoneNumber, this.props.verificationPassword)
   }

@@ -42,7 +42,7 @@ export const register = (phoneNumber, firstName, lastName, password) => {
    }
 
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/user/signup', request)
+  fetch(actionTypes.LOCAL_IP + '/user/signup', request)
   .then((response) => response.json())
   .then((responseJson) => {
       console.log(responseJson);

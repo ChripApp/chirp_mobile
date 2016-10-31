@@ -19,12 +19,11 @@ export default class Splash extends Component {
        console.log("Splash Token Exists");
        //Actions.login()
        this.props.autoLogin(result);
-       console.log(this.props);
-      // this.props.updateVerificationRequired(true);
-    	 Actions.mode();
+       //this.props.updateVerificationRequired(true);
+    	 Actions.mode({type: 'reset'});
     	}else if(err || !result){
         console.log("Splash Token Not Exists");
-    		Actions.login();
+    		Actions.login({type: 'reset'});
     	}
 
     });

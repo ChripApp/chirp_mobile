@@ -117,6 +117,7 @@ export default class Home extends Component {
     }
     return (
           <View style={styles.slide1}>
+            <View style={{height: 20}}></View>
             <View style={{flex:1, alignItems: 'flex-end'}}>
                 <TouchableHighlight
                     onPress={Actions.mode.bind(this, {type: "reset"})}
@@ -126,7 +127,7 @@ export default class Home extends Component {
                   <Text style={{fontSize: 40}}><Emoji name="heavy_multiplication_x"/></Text>
                 </TouchableHighlight>
             </View>
-            <View style={{flex: flexRatio - 1}}>
+            <View style={{flex: flexRatio - 1, paddingLeft: 15, paddingRight: 15}}>
               <Text style={{color: 'white', fontFamily: 'Arial', fontWeight: 'bold', fontSize: Dimensions.get('window').width * 0.08}}>
                 {this.props.store ? this.props.store.name : null}
               </Text>
@@ -243,14 +244,6 @@ var styles = StyleSheet.create({
   slide1: {
     backgroundColor: '#FFEC56',
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-  },
-  slide2: {
-    backgroundColor: '#FFEC56',
-  },
-  slide3: {
-    backgroundColor: '#FFEC56',
   },
   seatsRow:{
     flex: 1,

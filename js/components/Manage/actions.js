@@ -74,7 +74,7 @@ export const removeCustomer = (store,customer) => {
   }
 
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/store/removeCustomer', request)
+  fetch(actionTypes.LOCAL_IP + '/store/removeCustomer', request)
   .then((response) => response.json())
   .then((responseJson) => {
     console.log(responseJson);
@@ -123,7 +123,7 @@ export const dequeue = (store, customer, phoneNumber, seats) => {
   }
 
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/store/dequeue', request)
+  fetch(actionTypes.LOCAL_IP + '/store/dequeue', request)
   .then((response) => response.json())
   .then((responseJson) => {
     console.log(responseJson);

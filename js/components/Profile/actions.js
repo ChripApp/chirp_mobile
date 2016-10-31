@@ -38,7 +38,7 @@ export const reset = (store) => {
    }
 
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/store/reset', request)
+  fetch(actionTypes.LOCAL_IP + '/store/reset', request)
   .then((response) => response.json())
   .then((responseJson) => {
       if(responseJson.success){
@@ -98,7 +98,7 @@ export const updateProfileStore = (store, name, estmin) => {
    }
 
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/store/update', request)
+  fetch(actionTypes.LOCAL_IP + '/store/update', request)
   .then((response) => response.json())
   .then((responseJson) => {
 	    if(responseJson.success){

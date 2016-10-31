@@ -31,7 +31,7 @@ export const UPDATE_PROFILE_ESTMIN = 'UPDATE_PROFILE_ESTMIN'
 export const UPDATE_PROFILE_PASSWORD = 'UPDATE_PROFILE_PASSWORD'
 
 //local IP
-export const LOCAL_IP = '54.218.16.211:8081';
+export const LOCAL_IP = 'https://www.chirpapi.com:8081';
 // export const LOCAL_IP = '54.218.16.211:8081';
 //'192.168.0.4:8080';
 //'54.218.16.211:8081';

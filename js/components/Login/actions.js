@@ -44,7 +44,7 @@ export const login = (phoneNumber, password) => {
    }
    console.log(actionTypes.LOCAL_IP + '/user/signin/');
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/user/signin/', request)
+  fetch(actionTypes.LOCAL_IP + '/user/signin/', request)
   .then((response) => response.json())
   .then((responseJson) => {
     //Login Success
@@ -56,6 +56,10 @@ export const login = (phoneNumber, password) => {
       dispatch({
         user: responseJson.user,
         type: actionTypes.UPDATE_USER
+      })
+      dispatch({
+        verificationRequired: false,
+        type: actionTypes.UPDATE_VERIFICATIONREQUIRED
       })
       dispatch({
         password: '',
@@ -102,13 +106,15 @@ export const autoLogin = (token) => {
      headers: requestHeader,
      body: JSON.stringify(requestBody)
    }
-
+   console.log("token exists");
+   console.log(actionTypes.LOCAL_IP + '/user/autoSignin');
   return dispatch => {
-   fetch('http://' + actionTypes.LOCAL_IP + '/user/autoSignin', request)
+   fetch(actionTypes.LOCAL_IP + '/user/autoSignin', request)
   .then((response) => response.json())
   .then((responseJson) => {
       console.log(responseJson);
       if(responseJson.success){
+        console.log(responseJson);
         AsyncStorage.setItem('token', responseJson.token);
         dispatch({type: actionTypes.LOGIN_SUCCESS})
         dispatch({

@@ -37,7 +37,7 @@ export const verify = (phoneNumber , password) => {
      body: JSON.stringify(requestBody)
    }
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/user/verify', request)
+  fetch(actionTypes.LOCAL_IP + '/user/verify', request)
   .then((response) => response.json())
   .then((responseJson) => {
       console.log(responseJson);
