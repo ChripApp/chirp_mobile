@@ -19,58 +19,6 @@ function okAlert(title, content) {
     ]
   );
 }
-export const verify = (phoneNumber , password) => {
-  
-    var requestHeader = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-   }
-
-   var requestBody = {
-    phoneNumber: phoneNumber,
-    password: password
-   }
-
-   var request = {
-     method: 'POST',
-     headers: requestHeader,
-     body: JSON.stringify(requestBody)
-   }
-  return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/user/verify', request)
-  .then((response) => response.json())
-  .then((responseJson) => {
-      console.log(responseJson);
-      if(responseJson.success){
-         dispatch({
-          verified: true,
-          type: actionTypes.UPDATE_PROFILE_VERIFICATION
-         })
-         dispatch({
-            password: '',
-            type: actionTypes.UPDATE_PROFILE_PASSWORD
-          })
-      }else{
-         dispatch({
-          verified: false,
-          type: actionTypes.UPDATE_PROFILE_VERIFICATION
-         })
-        throw Error(responseJson.error);
-      }
-
-     })
-    .catch((error) => {
-       switch(error.message){
-        case 'phoneNumberNotExist':
-          okAlert('Phone Number Not Exist', 'Check your number buddy');
-        break;
-        case 'passwordNotMatch':
-          okAlert('Password Not Match', 'Check your password buddy');
-        break;
-      }
-    });
-  }
-}
 
 export const reset = (store) => {
   
@@ -174,12 +122,6 @@ export const updateProfileStore = (store, name, estmin) => {
    }
 }
 
-export const updateProfilePassword = (text) => {
-  return {
-    type: actionTypes.UPDATE_PROFILE_PASSWORD,
-    verificationPassword: text,
-  }
-}
 
 export const updateVerificationStatus = (text) => {
   return {

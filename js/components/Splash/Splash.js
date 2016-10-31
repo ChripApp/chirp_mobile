@@ -16,10 +16,14 @@ export default class Splash extends Component {
 
     AsyncStorage.getItem('token', (err, result) => {
     	if(result){
+       console.log("Splash Token Exists");
        //Actions.login()
        this.props.autoLogin(result);
-    	 Actions.main();
+       console.log(this.props);
+      // this.props.updateVerificationRequired(true);
+    	 Actions.mode();
     	}else if(err || !result){
+        console.log("Splash Token Not Exists");
     		Actions.login();
     	}
 

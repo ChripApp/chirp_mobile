@@ -6,8 +6,10 @@ import {
   TouchableHighlight,
   TextInput,
   StyleSheet,
-  Alert
+  Alert,
+  Dimensions
 } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 
 export default class Profile extends Component {
@@ -16,127 +18,100 @@ export default class Profile extends Component {
     this.state = {
 
     };
-    this._handleCurrentStoreName = this._handleCurrentStoreName.bind(this);
-    this._handleCurrentEstMin = this._handleCurrentEstMin.bind(this);
-    this._updateStore = this._updateStore.bind(this);
-    this._reset = this._reset.bind(this);
-    this._logout = this._logout.bind(this);
-  }
-  componentWillMount() {
-    if(this.props.store){
-      this.props.updateProfileStoreName(this.props.store.name);
+    this._handleCurrentPassword = this._handleCurrentPassword.bind(this);
+    this._verify = this._verify.bind(this);
+    this._goCustomerMode = this._goCustomerMode.bind(this);
+    this._goManagerMode = this._goManagerMode.bind(this);
 
-      if(this.props.store.estmin != undefined){
-        this.props.updateProfileEstMin("" + this.props.store.estmin);
-      }else{
-        this.props.updateProfileEstMin("");
-      }
-    }
-  }
-
-  componentWillUnmount(){
-    this.props.updateVerificationStatus(false);
-  }
-
-  componentWillReceiveProps(newProps){
- 
   }
 
   _handleCurrentPassword(text) {
     this.props.updateProfilePassword(text);
   }
 
-  _handleCurrentStoreName(text) {
-    this.props.updateProfileStoreName(text);
+  componentWillMount() {
+    if(this.props.verificationRequired)
+      this.props.navigationState.hideNavBar = false;
   }
 
-  _handleCurrentEstMin(text) {
-    this.props.updateProfileEstMin(text);
-  }
-
-  _updateStore() {
-    if(this.props.storename == undefined){
+  _verify() {
+    console.log(this.props);
+    if(this.props.verificationPassword == undefined){
       Alert.alert(
         "Sorry",
-        "Please enter the name of the store",
+        "Please enter password",
         [
           {text: 'OK', onPress: () => console.log('OK Pressed!')},
         ]
       );
       return;
     }
-    this.props.updateProfileStore(this.props.store._id, this.props.storename, this.props.estmin)
+    this.props.verify(this.props.user.phoneNumber, this.props.verificationPassword)
   }
 
-  _reset() {
-    this.props.reset(this.props.store._id)
+  _goCustomerMode() {
+    Actions.main({type: "reset"})
+    this.props.updateVerificationRequired(true);
+    this.props.updateVerificationStatus(false);
+    this.props.updateProfilePassword("");
   }
 
-  _logout() {
-    this.props.logout()
+  _goManagerMode() {
+    Actions.manage({type: "reset"});
+    
   }
 
   render() {
-    
+    if(!this.props.verified)
       return (
-
       <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
-        <View style={{marginBottom: 45, flexDirection: 'row'}}>
+        <Text style={styles.titleText}>
+          To continue, please enter your password
+        </Text>
+        <View style={{flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               <TextInput
-                style={styles.transInput}
-                placeholderTextColor='#88898C'
-                placeholder='Enter Store Name'
+                autoCapitalize="none"
                 autoCorrect={false}
-                onChangeText={this._handleCurrentStoreName}
-                value={this.props.storename}
-              />
-              <TextInput
-                style={styles.transInput}
+                onChangeText={this._handleCurrentPassword}
                 placeholderTextColor='#88898C'
-                placeholder='Enter Estimated Wait Time:  Min/Customer'
-                onChangeText={this._handleCurrentEstMin}
-                value={this.props.estmin}
+                placeholder='Enter Password'
+                secureTextEntry={true}
+                style={styles.transInput}
+                value={this.props.verificationPassword}
               />
               <View style={{height:45}}>
                 <TouchableHighlight
-                  onPress={this._updateStore}
+                  onPress={this._verify}
                   style={styles.buttonContainer}
                   underlayColor='transparent'
                 >
                   <Text style={styles.buttonText}>
-                    Update Info
+                    Verify
                   </Text>
                 </TouchableHighlight>
               </View>
           </View>
         </View>
-        <View style={{height: 45, flexDirection: 'row'}}>
-            <View style={{flex: 1}}>
-              <TouchableHighlight
-                onPress={this._reset}
-                style={styles.buttonContainer}
+      </View>
+      )
+    else
+      return (
+
+      <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
+      	<Text style={styles.infoText}> Select Mode </Text>
+        <TouchableHighlight
+                onPress={this._goCustomerMode}
                 underlayColor='transparent'
               >
-                <Text style={styles.buttonText}>
-                  Reset Store
-                </Text>
-              </TouchableHighlight>
-          </View>
-        </View>
-        <View style={{height: 45, flexDirection: 'row'}}>
-            <View style={{flex: 1}}>
-              <TouchableHighlight
-                onPress={this._logout}
-                style={styles.logoutButtonContainer}
+         <Text style={styles.chirpButtonText}>CUSTOMER MODE</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+                onPress={this._goManagerMode}
                 underlayColor='transparent'
               >
-                <Text style={styles.buttonText}>
-                  Log Out
-                </Text>
-              </TouchableHighlight>
-          </View>
-        </View>
+         <Text style={styles.chirpButtonText}>MANAGER MODE</Text>
+        </TouchableHighlight>
       </View>
     )
   }
@@ -217,4 +192,15 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
   },
+  chirpButtonText: {
+    fontFamily: 'Arial',
+    fontSize: Dimensions.get('window').width * 0.08,
+    fontWeight: 'bold',
+    color: 'rgba(0,0,0,0.3)',
+  },
+  infoText: {
+    fontFamily: 'Arial',
+    fontSize: Dimensions.get('window').width * 0.06,
+    fontWeight: 'bold',
+  }
 })

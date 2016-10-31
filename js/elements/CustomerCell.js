@@ -7,8 +7,11 @@ import {
   TextInput,
   View,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  Dimensions
 } from 'react-native';
+
+
 
 class customerCell extends Component {
   static propTypes = {
@@ -34,31 +37,31 @@ class customerCell extends Component {
   }
 
   _timeElapsed(){
-	var startTime = new Date();
+  	var startTime = new Date();
 
-	var endTime = this.state.time;
-	var timeDiff = startTime - endTime;
+  	var endTime = this.state.time;
+  	var timeDiff = startTime - endTime;
 
-	timeDiff /= 1000;
-	var seconds = Math.round(timeDiff % 60);
-	timeDiff = Math.floor(timeDiff / 60);
-	var minutes = Math.round(timeDiff % 60);
-	timeDiff = Math.floor(timeDiff / 60);
-	var hours = Math.round(timeDiff % 24);
-	timeDiff = Math.floor(timeDiff / 24);
-	var days = timeDiff;
+  	timeDiff /= 1000;
+  	var seconds = Math.round(timeDiff % 60);
+  	timeDiff = Math.floor(timeDiff / 60);
+  	var minutes = Math.round(timeDiff % 60);
+  	timeDiff = Math.floor(timeDiff / 60);
+  	var hours = Math.round(timeDiff % 24);
+  	timeDiff = Math.floor(timeDiff / 24);
+  	var days = timeDiff;
 
-	var returnText = "";
-	if(days == 0 && hours == 0 && minutes == 0){
-		returnText = seconds + " Sec Ago";
-	}else if(days == 0 && hours == 0){
-		returnText = minutes + " Min Ago";
-	}else if(days == 0){
-		returnText = hours + " Hrs " + minutes  + " Min Ago";
-	}else{
-		returnText = days + " Days Ago";
-	}
-	return returnText;
+  	var returnText = "";
+  	if(days == 0 && hours == 0 && minutes == 0){
+  		returnText = seconds + " Sec ago";
+  	}else if(days == 0 && hours == 0){
+  		returnText = minutes + " Min ago";
+  	}else if(days == 0){
+  		returnText = hours + " Hrs " + minutes  + " Min ago";
+  	}else{
+  		returnText = days + " Days ago";
+  	}
+  	return returnText;
   }
 
   _loadCustomer(data){
@@ -74,6 +77,8 @@ class customerCell extends Component {
 	   })}).then((response) => response.json())
 	  .then((responseJson) => {
 	  	 if(responseJson.success){
+        // this.props.phoneNumber = this.formatPhoneNumber(responseJson.customer.phoneNumber);
+        // this.props.seats = responseJson.customer.seats;
 	  	 	this.setState({
 	  	 		time: data.time,
 		     	phoneNumber: this.formatPhoneNumber(responseJson.customer.phoneNumber),
@@ -104,31 +109,37 @@ class customerCell extends Component {
 
   render() {
   	var ago = this._timeElapsed();
+
     return (
-      <View style={styles.container}>
-        <View style={styles.rowContainer}>
-          	<Text style={styles.infoText}> {this.state.seats} Seats </Text>
-            <Text style={styles.infoText}> {this.state.phoneNumber} </Text>
-          	<Text style={styles.infoText}> {ago} </Text>
-            {this.props.noRemove ?
-              null
-            :
-              <TouchableHighlight
-                onPress={this._dequeue}
-                underlayColor='#transparent'
-              >
-                <Text style={styles.chirpButtonText}>CHIRP!</Text>
-              </TouchableHighlight>
-            }
-        </View>
+      <View>
+          <View style={styles.container}>
+            <View style={styles.rowContainer}>  
+                <View>
+                	<Text style={styles.infoText}> {this.state.seats} Seats </Text>
+                  <Text style={styles.infoText}> {this.state.phoneNumber} </Text>
+                	<Text style={styles.infoText, {fontSize: Dimensions.get('window').width * 0.03, fontWeight: 'bold'}}> {ago} </Text>
+                </View>
+                {this.props.noRemove ?
+                  null
+                :
+                  <TouchableHighlight
+                    onPress={this._dequeue}
+                    underlayColor='transparent'
+                  >
+                    <Text style={styles.chirpButtonText}>CHIRP!</Text>
+                  </TouchableHighlight>
+                }
+            </View> 
+          </View>
       </View>
     )
   }
 }
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#FFEC56',
+    
   },
   // textContainer: {
   //   flex: 1,
@@ -141,13 +152,13 @@ const styles = StyleSheet.create({
   },
   chirpButtonText: {
     fontFamily: 'Arial',
-    fontSize: 70,
+    fontSize: Dimensions.get('window').width * 0.08,
     fontWeight: 'bold',
     color: 'rgba(0,0,0,0.3)',
   },
   infoText: {
     fontFamily: 'Arial',
-    fontSize: 40,
+    fontSize: Dimensions.get('window').width * 0.06,
     fontWeight: 'bold',
   }
 })

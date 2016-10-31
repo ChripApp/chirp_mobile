@@ -10,15 +10,15 @@ import {
   TextInput,
   Picker,
   Alert,
-  NavigatorIOS,
+  Dimensions,
 } from 'react-native'
-
 
 import InputNormal from '../../elements/InputNormal'
 import CustomerCell from '../../elements/CustomerCell'
 import Swiper from 'react-native-swiper'
 import { Actions } from 'react-native-router-flux'
 import Emoji from 'react-native-emoji'
+var flexRatio = (Dimensions.get('window').height / 50);
 
 var updating;
 export default class Home extends Component {
@@ -115,116 +115,93 @@ export default class Home extends Component {
       else
         estmin = "" + (this.props.store.estmin * this.props.store.waiting) + " Min";
     }
-    console.log(this.props);
     return (
-        <Swiper
-          activeDot={<View style={{backgroundColor: 'transparent'}} />}
-          dot={<View style={{backgroundColor:'transparent'}} />}
-          loop={false}
-          showsButtons={false}
-          style={styles.wrapper}
-        >
-          {/*Slide 1*/}
           <View style={styles.slide1}>
-            <View style={{flex: 1, justifyContent: 'space-between'}}>
-           {/*<Text>
-                {this.props.store ? this.props.store.name : ""}
-              </Text>*/}
-              <Text style={{color: 'white', fontFamily: 'Arial', fontWeight: 'bold', fontSize: 35}}>
+            <View style={{flex:1, alignItems: 'flex-end'}}>
+                <TouchableHighlight
+                    onPress={Actions.mode.bind(this, {type: "reset"})}
+                    underlayColor='transparent'
+                    style={{paddingRight: 10}}
+                  >
+                  <Text style={{fontSize: 40}}><Emoji name="heavy_multiplication_x"/></Text>
+                </TouchableHighlight>
+            </View>
+            <View style={{flex: flexRatio - 1}}>
+              <Text style={{color: 'white', fontFamily: 'Arial', fontWeight: 'bold', fontSize: Dimensions.get('window').width * 0.08}}>
                 {this.props.store ? this.props.store.name : null}
               </Text>
-              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 70}}>
-                Groups Ahead {this.props.store ? this.props.store.queue.length : ""}
-              </Text>
-              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 70, color: 'rgba(0,0,0,0.3)'}}>
-                {this.props.store ? estmin + ' Wait' : ""}
-              </Text>
-            </View>
-            <View style={{flex: 4, justifyContent: 'flex-end'}}>
-              <TextInput
-                keyboardType='phone-pad'
-                maxLength={14}
-                onChangeText={this._handleCurrentPhoneNumber}
-                placeholderTextColor='#88898C'
-                placeholder='Enter Phone #'
-                style={styles.transInput}
-                value={this.props.homePhoneNumber}
-              />
-              <View style={{height: 45, flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
+              <View style={{flex: 1, justifyContent: 'space-between'}}>
+               
+                <Text style={{fontSize: Dimensions.get('window').width * 0.08}}>
+                  Groups Ahead {this.props.store ? this.props.store.queue.length : ""}
+                </Text>
+                <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: Dimensions.get('window').width * 0.08, color: 'rgba(0,0,0,0.3)'}}>
+                  {this.props.store ? estmin + ' Wait' : ""}
+                </Text>
+              </View>
+              <View style={{flex: 4, justifyContent: 'flex-end'}}>
+                <TextInput
+                  keyboardType='phone-pad'
+                  maxLength={14}
+                  onChangeText={this._handleCurrentPhoneNumber}
+                  placeholderTextColor='#88898C'
+                  placeholder='Enter Phone #'
+                  style={styles.transInput}
+                  value={this.props.homePhoneNumber}
+                />
+                <View style={{height: 45, flexDirection: 'row'}}>
+                  <View style={{flex: 1}}>
+                    <TouchableHighlight
+                      onPress={this._handleNewCustomer}
+                      style={styles.buttonContainer}
+                      underlayColor='transparent'
+                    >
+                      <Text style={styles.buttonText}>
+                        Reserve
+                      </Text>
+                    </TouchableHighlight>
+                  </View>
+                </View>
+              </View>
+
+              <View style={styles.seatsRow}>
+                <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}></View>
+
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                  { this.props.homeSeats > 1 ?
                   <TouchableHighlight
-                    onPress={this._handleNewCustomer}
-                    style={styles.buttonContainer}
+                    onPress={this._decrementSeats}
                     underlayColor='transparent'
                   >
-                    <Text style={styles.buttonText}>
-                      Reserve
-                    </Text>
+                    <Image
+                      source={require('../../../public/assets/img/simpleMinus.png')}
+                    />
                   </TouchableHighlight>
+                  : null }
+                </View>
+
+                <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+                  <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
+                      {this.props.homeSeats}
+                  </Text>
+                </View>
+
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                   { this.props.homeSeats < 15 ?
+                  <TouchableHighlight
+                    onPress={this._incrementSeats}
+                    underlayColor='transparent'
+                  >
+                      <Image
+                        source={require('../../../public/assets/img/simplePlus.png')}
+                      />
+                  </TouchableHighlight>
+                  : null}
                 </View>
               </View>
             </View>
-
-            <View style={styles.seatsRow}>
-              <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}></View>
-
-              <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                { this.props.homeSeats > 1 ?
-                <TouchableHighlight
-                  onPress={this._decrementSeats}
-                  underlayColor='transparent'
-                >
-                  <Image
-                    source={require('../../../public/assets/img/simpleMinus.png')}
-                  />
-                </TouchableHighlight>
-                : null }
-              </View>
-
-              <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
-                <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
-                    {this.props.homeSeats}
-                </Text>
-              </View>
-
-              <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                 { this.props.homeSeats < 15 ?
-                <TouchableHighlight
-                  onPress={this._incrementSeats}
-                  underlayColor='transparent'
-                >
-                    <Image
-                      source={require('../../../public/assets/img/simplePlus.png')}
-                    />
-                </TouchableHighlight>
-                : null}
-              </View>
-            </View>
+            
           </View>
-
-          {/*Slide 2*/}
-          <View style={styles.slide2}>
-            <View style={{paddingLeft: 15, paddingRight: 15, backgroundColor: '#FFEC56'}}>
-              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 35, color: 'white'}}>Waitlist</Text>
-            </View>
-            <ListView
-              dataSource={this.props.store ? new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.store.queue) : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([])}
-              enableEmptySections={true}
-              renderRow={(rowData) => <CustomerCell data={rowData} dequeue={this._handleRemoveCustomer} />}
-            />
-          </View>
-          {/*Slide 3*/}
-          <View style={styles.slide3}>
-            <View style={{paddingLeft: 15, paddingRight: 15, backgroundColor: '#FFEC56'}}>
-              <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 35, color: 'white'}}>Customers</Text>
-            </View>
-            <ListView
-              dataSource={this.props.store && this.props.store.doneQueue ? new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.store.doneQueue) : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([])}
-              enableEmptySections={true}
-              renderRow={(rowData) => <CustomerCell noRemove={true} data={rowData} dequeue={this._handleRemoveCustomer} />}
-            />
-          </View>
-        </Swiper>
     )
   }
 }

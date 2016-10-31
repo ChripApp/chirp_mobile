@@ -42,16 +42,16 @@ export const login = (phoneNumber, password) => {
      headers: requestHeader,
      body: JSON.stringify(requestBody)
    }
-   console.log('http://' + actionTypes.LOCAL_IP + '/user/signin/');
+   console.log(actionTypes.LOCAL_IP + '/user/signin/');
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/user/signin/', request)
+  fetch('https://' + actionTypes.LOCAL_IP + '/user/signin/', request)
   .then((response) => response.json())
   .then((responseJson) => {
     //Login Success
     console.log(responseJson);
     if(responseJson.success){
       AsyncStorage.setItem('token', responseJson.token);
-      Actions.main()
+      Actions.mode()
       dispatch({type: actionTypes.LOGIN_SUCCESS})
       dispatch({
         user: responseJson.user,
