@@ -16,6 +16,7 @@ import {
 
 import Tabs from 'react-native-tabs';
 import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import InputNormal from '../../elements/InputNormal'
 import CustomerCell from '../../elements/CustomerCell'
@@ -23,8 +24,8 @@ import { Actions } from 'react-native-router-flux'
 import Emoji from 'react-native-emoji'
 
 var flexRatio = (Dimensions.get('window').height / 100);
-
 var updating;
+
 export default class Manage extends Component {
   constructor() {
     super();
@@ -81,63 +82,69 @@ export default class Manage extends Component {
         <View style={styles.container}>
           <View style={{height: 20}}></View>
           <View style={{flex:1, alignItems: 'flex-end'}}>
-            <View style={{flex: 1, flexDirection: 'row'}}>
-              <TouchableHighlight
+            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+              <View>
+                <TouchableHighlight
                   onPress={Actions.profile.bind(this, {type: "reset"})}
                   underlayColor='transparent'
-                  style={{paddingRight: 10}}
+                  style={{paddingRight: 270, paddingTop: 11}}
                 >
-                <Text style={{fontSize: 40}}><Emoji name="gear"/></Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                  onPress={Actions.mode.bind(this, {type: "reset"})}
-                  underlayColor='transparent'
-                  style={{paddingRight: 10}}
-                >
-                <Text style={{fontSize: 40}}><Emoji name="heavy_multiplication_x"/></Text>
-              </TouchableHighlight>
+                    <Image
+                      source={require('../../../public/assets/img/settingsIcon.png')}
+                      style={{width: 35, height: 35}}
+                    />
+                </TouchableHighlight>
+              </View>
+              <View>
+                <TouchableHighlight
+                    onPress={Actions.mode.bind(this, {type: "reset"})}
+                    underlayColor='transparent'
+                    style={{paddingRight: 15, paddingTop: 11}}
+                  >
+                    <Image
+                      source={require('../../../public/assets/img/crossIcon.png')}
+                      style={{width: 35, height: 35}}
+                    />
+                </TouchableHighlight>
+              </View>
             </View>
-            <Tabs selected={this.state.page} style={{backgroundColor:'transparent', flex:1}}
+            <Tabs selected={this.state.page} style={{backgroundColor:'transparent', flex:1, fontSize: 30}}
                 selectedStyle={{color:'black'}} onSelect={el=>this.setState({page:el.props.name})}>
-                <Text name="waitlist" selectedIconStyle={{borderBottomWidth:2,borderBottomColor:'black'}}>Waitlist</Text>
-                <Text name="customer" selectedIconStyle={{borderBottomWidth:2,borderBottomColor:'black'}}>Customers</Text>
+                <Text name="Waitlist" selectedIconStyle={{borderBottomWidth:0, borderBottomColor:'black'}} style={styles.tabButtonText}>
+                  Waitlist
+                </Text>
+                <Text name="Customer" selectedIconStyle={{borderBottomWidth:0, borderBottomColor:'black'}}  style={styles.tabButtonText}>
+                  Customers
+                </Text>
             </Tabs>
           </View>
           <View style={{flex:flexRatio - 1}}>
-            {this.state.page == "waitlist" ? 
+            {this.state.page == "waitlist" ?
               (<View style={styles.tabContainer}>
-                  <View style={{paddingLeft: 15, paddingRight: 15, backgroundColor: '#FFEC56'}}>
-                    <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 35, color: 'white'}}>Waitlist</Text>
-                  </View>
                   <SwipeListView
                     ref="waitlist"
                     dataSource={this.props.store ? new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.store.queue) : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([])}
                     enableEmptySections={true}
                     renderRow={
-                      (rowData) => 
+                      (rowData) =>
                       <SwipeRow
-                          rightOpenValue={-100}
-                          disableRightSwipe={true}
-                          closeOnRowPress={true}>
+                        rightOpenValue={-100}
+                        disableRightSwipe={true}
+                        closeOnRowPress={true}
+                      >
                         <View>
                           <TouchableHighlight style={{alignItems: 'flex-end', justifyContent: 'center', backgroundColor: 'red', height: Dimensions.get('window').width * 0.45}}>
                                   <Text style={{color: 'white', paddingRight: 5, fontSize: 35}}>Remove</Text>
                           </TouchableHighlight>
                         </View>
-                        <CustomerCell ref={"row" + this.props.store.queue.indexOf(rowData)} data={rowData} dequeue={this._handleRemoveCustomer} />
+                        <CustomerCell ref={"row" + this.props.store.queue.indexOf(rowData)} data={rowData} dequeue={this._handleRemoveCustomer}/>
                       </SwipeRow>
                     }
                     onRowOpen={this._dequeueAlert}
-                    
-                    
-                    
                   />
                 </View>): null}
-            {this.state.page == "customer" ? 
+            {this.state.page == "customer" ?
               (<View style={styles.tabContainer}>
-                  <View style={{paddingLeft: 15, paddingRight: 15, backgroundColor: '#FFEC56'}}>
-                    <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: 35, color: 'white'}}>Customers</Text>
-                  </View>
                   <ListView
                     dataSource={this.props.store && this.props.store.doneQueue ? new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.store.doneQueue) : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([])}
                     enableEmptySections={true}
@@ -169,6 +176,12 @@ var styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFEC56',
     flex: 1,
+  },
+  tabButtonText: {
+    color: 'rgba(0,0,0,0.3)',
+    fontFamily: 'Helvetica Neue',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   text: {
     color: '#fff',

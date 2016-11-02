@@ -31,9 +31,8 @@ export default class Splash extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View>
         <Text>
-         	Splash
         </Text>
       </View>
     )

@@ -32,7 +32,7 @@ export default class App extends Component {
       <Provider store={store}>
         <RouterWithRedux>
           <Scene key='root' barButtonIconStyle={{ tintColor: 'black' }}>
-            <Scene component={Splash} initial={true} key='splash' title='Splash Page'/>
+            <Scene component={Splash} hideNavBar={true} initial={true} key='splash' title='Splash Page' sceneStyle={{backgroundColor: '#FFEC56'}}/>
             <Scene component={Mode} hideNavBar={true} key='mode' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#FFEC56'}}/>
             <Scene component={Login} hideNavBar key='login' sceneStyle={{backgroundColor: '#FFEC56'}}/>
             <Scene component={Register} hideNavBar={false} key='register' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#FFEC56'}} backButtonTextStyle={{color: 'black'}}/>

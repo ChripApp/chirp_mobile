@@ -48,14 +48,14 @@ export const register = (phoneNumber, firstName, lastName, password) => {
       console.log(responseJson);
       if(responseJson.success){
         AsyncStorage.setItem('token', responseJson.token);
-        Actions.main()
+        Actions.mode()
         dispatch({type: actionTypes.LOGIN_SUCCESS})
         dispatch({
-          user: responseJson.user , 
+          user: responseJson.user ,
           type: actionTypes.UPDATE_USER
         })
         dispatch({
-          store: responseJson.store , 
+          store: responseJson.store ,
           type: actionTypes.UPDATE_STORE
         })
       }else{
@@ -106,4 +106,3 @@ export const updateConfirmPassword = (text) => {
     passwordConfirm: text,
   }
 }
-

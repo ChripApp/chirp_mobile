@@ -97,9 +97,7 @@ export default class Login extends Component {
             style={styles.chirpImg}
           />
           <Text style={styles.chirpText}>CHIRP</Text>
-
         </View>
-
         <View style={{flex: 1, justifyContent: 'flex-start'}}>
           <TextInput
             style={styles.transInput}
@@ -120,6 +118,7 @@ export default class Login extends Component {
             secureTextEntry={true}
             value={this.props.password}
           />
+
           <View style={{height: 45, flexDirection: 'row',}}>
             <View style={{flex: 1}}>
               <TouchableHighlight
@@ -147,6 +146,7 @@ export default class Login extends Component {
               </TouchableHighlight>
             </View>
           </View>
+
         </View>
       </View>
     )
