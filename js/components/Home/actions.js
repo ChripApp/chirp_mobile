@@ -39,7 +39,7 @@ export const updateStore = (store) => {
 
 
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/store/getstore', request)
+  fetch(actionTypes.LOCAL_IP + '/store/getstore', request)
   .then((response) => response.json())
   .then((responseJson) => {
 	    if(responseJson.success){
@@ -81,7 +81,7 @@ export const enqueue = (store, phoneNumber, seats) => {
   }
 
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/store/enqueue', request)
+  fetch(actionTypes.LOCAL_IP + '/store/enqueue', request)
   .then((response) => response.json())
   .then((responseJson) => {
     if(responseJson.success){
@@ -139,7 +139,7 @@ export const dequeue = (store, customer, phoneNumber, seats) => {
   }
 
   return dispatch => {
-  fetch('http://' + actionTypes.LOCAL_IP + '/store/dequeue', request)
+  fetch(actionTypes.LOCAL_IP + '/store/dequeue', request)
   .then((response) => response.json())
   .then((responseJson) => {
     console.log(responseJson);

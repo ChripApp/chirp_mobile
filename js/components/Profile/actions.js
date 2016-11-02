@@ -46,7 +46,7 @@ export const reset = (store) => {
             store: responseJson.store, 
             type: actionTypes.UPDATE_STORE
          })
-         Actions.home();
+         Actions.manage({type: 'reset'});
       }
      })
     .catch((error) => {

@@ -120,7 +120,7 @@ export default class Home extends Component {
             <View style={{height: 20}}></View>
             <View style={{flex:1, alignItems: 'flex-end'}}>
                 <TouchableHighlight
-                    onPress={Actions.mode.bind(this, {type: "reset"})}
+                    onPress={Actions.mode}
                     underlayColor='transparent'
                     style={{paddingRight: 10}}
                   >
