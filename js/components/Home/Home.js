@@ -122,9 +122,12 @@ export default class Home extends Component {
                 <TouchableHighlight
                     onPress={Actions.mode}
                     underlayColor='transparent'
-                    style={{paddingRight: 10}}
+                    style={{paddingRight: 15, paddingTop: 11}}
                   >
-                  <Text style={{fontSize: 40}}><Emoji name="heavy_multiplication_x"/></Text>
+                    <Image
+                      source={require('../../../public/assets/img/crossIcon.png')}
+                      style={{width: 35, height: 35}}
+                    />
                 </TouchableHighlight>
             </View>
             <View style={{flex: flexRatio - 1, paddingLeft: 15, paddingRight: 15}}>
@@ -132,7 +135,7 @@ export default class Home extends Component {
                 {this.props.store ? this.props.store.name : null}
               </Text>
               <View style={{flex: 1, justifyContent: 'space-between'}}>
-               
+
                 <Text style={{fontSize: Dimensions.get('window').width * 0.08}}>
                   Groups Ahead {this.props.store ? this.props.store.queue.length : ""}
                 </Text>
@@ -201,7 +204,7 @@ export default class Home extends Component {
                 </View>
               </View>
             </View>
-            
+
           </View>
     )
   }

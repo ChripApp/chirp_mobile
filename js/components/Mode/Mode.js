@@ -67,60 +67,76 @@ export default class Profile extends Component {
 
   _goManagerMode() {
     Actions.manage({type: "reset"});
-    
+
   }
 
   render() {
-    if(!this.props.verified)
+{/*    if(!this.props.verified)
       return (
       <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
         <Text style={styles.titleText}>
           To continue, please enter your password
         </Text>
         <View style={{flexDirection: 'row'}}>
-            <View style={{flex: 1}}>
-              <TextInput
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={this._handleCurrentPassword}
-                placeholderTextColor='#88898C'
-                placeholder='Enter Password'
-                secureTextEntry={true}
-                style={styles.transInput}
-                value={this.props.verificationPassword}
-              />
-              <View style={{height:45}}>
-                <TouchableHighlight
-                  onPress={this._verify}
-                  style={styles.buttonContainer}
-                  underlayColor='transparent'
-                >
-                  <Text style={styles.buttonText}>
-                    Verify
-                  </Text>
-                </TouchableHighlight>
-              </View>
+          <View style={{flex: 1}}>
+            <TextInput
+              autoCapitalize="none"
+              autoCorrect={false}
+              onChangeText={this._handleCurrentPassword}
+              placeholderTextColor='#88898C'
+              placeholder='Enter Password'
+              secureTextEntry={true}
+              style={styles.transInput}
+              value={this.props.verificationPassword}
+            />
+            <View style={{height:45}}>
+              <TouchableHighlight
+                onPress={this._verify}
+                style={styles.buttonContainer}
+                underlayColor='transparent'
+              >
+                <Text style={styles.buttonText}>
+                  Verify
+                </Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
       </View>
       )
-    else
-      return (
-
+    else*/}
+    return (
       <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
-      	<Text style={styles.infoText}> Select Mode </Text>
-        <TouchableHighlight
-                onPress={this._goCustomerMode}
-                underlayColor='transparent'
-              >
-         <Text style={styles.chirpButtonText}>CUSTOMER MODE</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
+      	<Text style={styles.titleText}>Select Mode</Text>
+        <View style={{flexDirection: 'row'}}>
+          <View style={{flex: 1}}>
+
+            <View style={{height:45}}>
+              <TouchableHighlight
                 onPress={this._goManagerMode}
+                style={styles.buttonContainer}
                 underlayColor='transparent'
               >
-         <Text style={styles.chirpButtonText}>MANAGER MODE</Text>
-        </TouchableHighlight>
+                <Text style={styles.buttonText}>
+                  Manager Mode
+                </Text>
+              </TouchableHighlight>
+            </View>
+
+            <View style={{height:45}}>
+              <TouchableHighlight
+                onPress={this._goCustomerMode}
+                style={styles.buttonContainer}
+                underlayColor='transparent'
+              >
+                <Text style={styles.buttonText}>
+                  Customer Mode
+                </Text>
+              </TouchableHighlight>
+            </View>
+
+          </View>
+        </View>
       </View>
     )
   }
