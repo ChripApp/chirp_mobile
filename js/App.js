@@ -33,13 +33,12 @@ export default class App extends Component {
         <RouterWithRedux>
           <Scene key='root' barButtonIconStyle={{ tintColor: 'black' }}>
             <Scene component={Splash} hideNavBar={true} initial={true} key='splash' title='Splash Page' sceneStyle={{backgroundColor: '#FFEC56'}}/>
-            <Scene component={Mode} hideNavBar={true} key='mode' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#FFEC56'}}/>
+            <Scene component={Mode} hideNavBar={false} key='mode' backButtonTextStyle={{color: 'black'}} barButtonIconStyle={{ tintColor: 'black' }} navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#FFEC56'}}/>
             <Scene component={Login} hideNavBar key='login' sceneStyle={{backgroundColor: '#FFEC56'}}/>
             <Scene component={Register} hideNavBar={false} key='register' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#FFEC56'}} backButtonTextStyle={{color: 'black'}}/>
             <Scene component={Manage} hideNavBar={true} key='manage' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} sceneStyle={{backgroundColor: '#FFEC56'}}/>
-            <Scene key="main" component={Home} hideNavBar={true} navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} barButtonIconStyle={{ tintColor: 'black' }}>
-            </Scene>
-            <Scene component={Profile} hideNavBar={true} direction='vertical' rightTitle='' key='profile' sceneStyle={{backgroundColor: '#FFEC56'}} />
+            <Scene key="main" component={Home} hideNavBar={true} navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} barButtonIconStyle={{ tintColor: 'black' }}/>
+            <Scene component={Profile} hideNavBar={false} direction='vertical' key='profile' navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} backButtonTextStyle={{color: 'black'}} sceneStyle={{backgroundColor: '#FFEC56'}} />
           </Scene>
         </RouterWithRedux>
       </Provider>

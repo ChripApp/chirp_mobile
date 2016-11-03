@@ -26,13 +26,12 @@ export default class Profile extends Component {
   }
 
   _handleCurrentPassword(text) {
+    if(text.charAt(text.length - 1) == ' ')
+      return;
+    
     this.props.updateProfilePassword(text);
   }
 
-  componentWillMount() {
-    if(this.props.verificationRequired)
-      this.props.navigationState.hideNavBar = false;
-  }
 
   _verify() {
     console.log(this.props);
@@ -66,12 +65,14 @@ export default class Profile extends Component {
   }
 
   _goManagerMode() {
+    this.props.updateVerificationRequired(false);
     Actions.manage({type: "reset"});
 
   }
 
   render() {
-{/*    if(!this.props.verified)
+{    
+    if(!this.props.verified)
       return (
       <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
         <Text style={styles.titleText}>
@@ -104,7 +105,7 @@ export default class Profile extends Component {
         </View>
       </View>
       )
-    else*/}
+    else
     return (
       <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
       	<Text style={styles.titleText}>Select Mode</Text>
@@ -139,6 +140,7 @@ export default class Profile extends Component {
         </View>
       </View>
     )
+  }
   }
 }
 

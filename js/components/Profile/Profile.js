@@ -42,15 +42,16 @@ export default class Profile extends Component {
  
   }
 
-  _handleCurrentPassword(text) {
-    this.props.updateProfilePassword(text);
-  }
+
 
   _handleCurrentStoreName(text) {
     this.props.updateProfileStoreName(text);
   }
 
   _handleCurrentEstMin(text) {
+    if(text.charAt(text.length - 1) == ' ')
+      return;
+
     this.props.updateProfileEstMin(text);
   }
 
@@ -64,12 +65,32 @@ export default class Profile extends Component {
         ]
       );
       return;
+    }else if(this.props.estmin != undefined && isNan(this.props.estmin)){
+      Alert.alert(
+        "Sorry",
+        "Please enter number for the est minute",
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed!')},
+        ]
+      );
+      return;
     }
     this.props.updateProfileStore(this.props.store._id, this.props.storename, this.props.estmin)
   }
 
   _reset() {
-    this.props.reset(this.props.store._id)
+    function reset(){
+      this.props.reset(this.props.store._id)
+    }
+    var bindedReset = reset.bind(this);
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to reset?',
+      [
+        {text: 'YES', onPress: bindedReset},
+        {text: 'NO', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      ]
+    )
   }
 
   _logout() {
@@ -86,6 +107,7 @@ export default class Profile extends Component {
               <TextInput
                 style={styles.transInput}
                 placeholderTextColor='#88898C'
+                maxLength={20}
                 placeholder='Enter Store Name'
                 autoCorrect={false}
                 onChangeText={this._handleCurrentStoreName}

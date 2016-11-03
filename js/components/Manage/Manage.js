@@ -36,7 +36,7 @@ export default class Manage extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows([]),
-      page: 'waitlist'
+      page: 'Waitlist'
     };
   }
 
@@ -61,15 +61,15 @@ export default class Manage extends Component {
     };
     this.refs.waitlist.safeCloseOpenRow();
     var bindedRemoveCustomer = removeCustomer.bind(this);
-
-    Alert.alert(
-      'Confirmation',
-      'Do you want to remove this customer from waitlist?',
-      [
-        {text: 'YES', onPress: bindedRemoveCustomer},
-        {text: 'NO', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-      ]
-    )
+    bindedRemoveCustomer();
+    // Alert.alert(
+    //   'Confirmation',
+    //   'Do you want to remove this customer from waitlist?',
+    //   [
+    //     {text: 'YES', onPress: bindedRemoveCustomer},
+    //     {text: 'NO', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+    //   ]
+    // )
     //this.props.store.queue[]
   }
 
@@ -85,7 +85,7 @@ export default class Manage extends Component {
             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
               <View>
                 <TouchableHighlight
-                  onPress={Actions.profile.bind(this, {type: "reset"})}
+                  onPress={Actions.profile}
                   underlayColor='transparent'
                   style={{paddingRight: 270, paddingTop: 11}}
                 >
@@ -97,7 +97,7 @@ export default class Manage extends Component {
               </View>
               <View>
                 <TouchableHighlight
-                    onPress={Actions.mode.bind(this, {type: "reset"})}
+                    onPress={Actions.mode}
                     underlayColor='transparent'
                     style={{paddingRight: 15, paddingTop: 11}}
                   >
@@ -108,7 +108,7 @@ export default class Manage extends Component {
                 </TouchableHighlight>
               </View>
             </View>
-            <Tabs selected={this.state.page} style={{backgroundColor:'transparent', flex:1, fontSize: 30}}
+            <Tabs selected={this.state.page} style={{backgroundColor:'transparent', flex:1}}
                 selectedStyle={{color:'black'}} onSelect={el=>this.setState({page:el.props.name})}>
                 <Text name="Waitlist" selectedIconStyle={{borderBottomWidth:0, borderBottomColor:'black'}} style={styles.tabButtonText}>
                   Waitlist
@@ -119,7 +119,7 @@ export default class Manage extends Component {
             </Tabs>
           </View>
           <View style={{flex:flexRatio - 1}}>
-            {this.state.page == "waitlist" ?
+            {this.state.page == "Waitlist" ?
               (<View style={styles.tabContainer}>
                   <SwipeListView
                     ref="waitlist"
@@ -128,7 +128,7 @@ export default class Manage extends Component {
                     renderRow={
                       (rowData) =>
                       <SwipeRow
-                        rightOpenValue={-100}
+                        rightOpenValue={-Dimensions.get('window').width * 1.30}
                         disableRightSwipe={true}
                         closeOnRowPress={true}
                       >
@@ -137,18 +137,27 @@ export default class Manage extends Component {
                                   <Text style={{color: 'white', paddingRight: 5, fontSize: 35}}>Remove</Text>
                           </TouchableHighlight>
                         </View>
-                        <CustomerCell ref={"row" + this.props.store.queue.indexOf(rowData)} data={rowData} dequeue={this._handleRemoveCustomer}/>
+                        <CustomerCell 
+                          backgroundColor={this.props.store.queue.indexOf(rowData) % 3 == 0 ? "#888888" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#333333" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#555555" : "#ffffff"}
+                          ref={"row" + this.props.store.queue.indexOf(rowData)} 
+                          data={rowData} 
+                          dequeue={this._handleRemoveCustomer}/>
                       </SwipeRow>
                     }
                     onRowOpen={this._dequeueAlert}
                   />
                 </View>): null}
-            {this.state.page == "customer" ?
+            {this.state.page == "Customer" ?
               (<View style={styles.tabContainer}>
                   <ListView
                     dataSource={this.props.store && this.props.store.doneQueue ? new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.store.doneQueue) : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([])}
                     enableEmptySections={true}
-                    renderRow={(rowData) => <CustomerCell noRemove={true} data={rowData} dequeue={this._handleRemoveCustomer} />}
+                    renderRow={(rowData) => 
+                        <CustomerCell 
+                          backgroundColor={this.props.store.queue.indexOf(rowData) % 3 == 0 ? "#888888" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#333333" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#555555" : "#ffffff"}
+                          noRemove={true} 
+                          data={rowData} 
+                          dequeue={this._handleRemoveCustomer} />}
                   />
                 </View>): null}
           </View>
@@ -158,17 +167,6 @@ export default class Manage extends Component {
 }
 
 var styles = StyleSheet.create({
-  buttonText: {
-    // color: 'rgba(255,255,255,0.2)',
-    // color: '#986B6C',
-    // fontSize: 13,
-    // fontFamily: 'Helvetica Neue',
-    // fontWeight: 'bold',
-    color: 'rgba(0,0,0,0.3)',
-    fontFamily: 'Helvetica Neue',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
   wrapper: {
     backgroundColor: '#FFEC56',
     paddingTop: 15,

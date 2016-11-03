@@ -112,7 +112,7 @@ class customerCell extends Component {
 
     return (
       <View>
-          <View style={styles.container}>
+          <View style={styles.container, {backgroundColor: this.props.backgroundColor}}>
             <View style={styles.rowContainer}>  
                 <View>
                 	<Text style={styles.infoText}> {this.state.seats} Seats </Text>

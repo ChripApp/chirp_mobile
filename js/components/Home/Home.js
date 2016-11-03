@@ -56,6 +56,7 @@ export default class Home extends Component {
 
   _handleCurrentPhoneNumber(text) {
 
+
     var phoneNumber = text.match(/\d/g);
     if(phoneNumber != undefined){
       phoneNumber = phoneNumber.join("");
@@ -157,8 +158,9 @@ export default class Home extends Component {
                   <View style={{flex: 1}}>
                     <TouchableHighlight
                       onPress={this._handleNewCustomer}
-                      style={styles.buttonContainer}
+                      style={(this.props.homePhoneNumber == undefined || this.props.homePhoneNumber.length < 14) ? styles.disabledButtonContainer : styles.buttonContainer}
                       underlayColor='transparent'
+                      disabled={this.props.homePhoneNumber == undefined || this.props.homePhoneNumber.length < 14}
                     >
                       <Text style={styles.buttonText}>
                         Reserve
@@ -223,11 +225,19 @@ var styles = StyleSheet.create({
     // flex: 1,
     alignItems: 'center',
     backgroundColor: '#F4F3F1',
-    borderColor: 'black',
     borderWidth: 0,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  disabledButtonContainer: {
+    alignItems: 'center',
+    backgroundColor: '#F4F3F1',
+    borderWidth: 0,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    opacity: 0.6
   },
   buttonText: {
     // color: 'rgba(255,255,255,0.2)',

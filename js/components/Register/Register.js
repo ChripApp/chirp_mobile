@@ -26,6 +26,7 @@ export default class Register extends Component {
   }
 
   _handleCurrentPhoneNumber(text) {
+ 
 
     var phoneNumber = text.match(/\d/g);
     if(phoneNumber != undefined){
@@ -48,6 +49,7 @@ export default class Register extends Component {
   }
 
   _handleCurrentFirstName(text) {
+
     this.props.updateFirstName(text)
   }
 
@@ -56,11 +58,16 @@ export default class Register extends Component {
   }
 
   _handleCurrentPassword(text) {
+    if(text.charAt(text.length - 1) == ' ')
+      return;
+
     this.props.updatePassword(text)
   }
   _handleCurrentConfirmPassword(text) {
+    if(text.charAt(text.length - 1) == ' ')
+      return;
+
     this.props.updateConfirmPassword(text)
-    console.log(this.props);
   }
 
 

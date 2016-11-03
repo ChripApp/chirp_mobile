@@ -111,7 +111,7 @@ export const updateProfileStore = (store, name, estmin) => {
           updateProfileEstMin("" +  responseJson.store.estmin);
         }
         
-        Actions.home();
+        Actions.manage({type: 'reset'});
 	    }else{
         throw Error(responseJson.error);
       }
