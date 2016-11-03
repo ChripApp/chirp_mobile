@@ -11,8 +11,6 @@ import {
   Dimensions
 } from 'react-native';
 
-
-
 class customerCell extends Component {
   static propTypes = {
     style: React.PropTypes.object,
@@ -113,23 +111,21 @@ class customerCell extends Component {
     return (
       <View>
           <View style={styles.container, {backgroundColor: this.props.backgroundColor}}>
-            <View style={styles.rowContainer}>  
-                <View>
+            <View style={styles.rowContainer}>
                 	<Text style={styles.infoText}> {this.state.seats} Seats </Text>
                   <Text style={styles.infoText}> {this.state.phoneNumber} </Text>
-                	<Text style={styles.infoText, {fontSize: Dimensions.get('window').width * 0.03, fontWeight: 'bold'}}> {ago} </Text>
-                </View>
-                {this.props.noRemove ?
-                  null
-                :
-                  <TouchableHighlight
+                	<Text style={styles.infoText, {fontSize: Dimensions.get('window').width * 0.09, fontWeight: 'bold'}}> {ago} </Text>
+                  {this.props.noRemove ?
+                    null
+                    :
+                    <TouchableHighlight
                     onPress={this._dequeue}
                     underlayColor='transparent'
-                  >
+                    >
                     <Text style={styles.chirpButtonText}>CHIRP!</Text>
-                  </TouchableHighlight>
-                }
-            </View> 
+                    </TouchableHighlight>
+                  }
+            </View>
           </View>
       </View>
     )
@@ -139,7 +135,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFEC56',
-    
+
   },
   // textContainer: {
   //   flex: 1,
@@ -152,13 +148,13 @@ const styles = StyleSheet.create({
   },
   chirpButtonText: {
     fontFamily: 'Arial',
-    fontSize: Dimensions.get('window').width * 0.08,
+    fontSize: Dimensions.get('window').width * 0.09,
     fontWeight: 'bold',
     color: 'rgba(0,0,0,0.3)',
   },
   infoText: {
     fontFamily: 'Arial',
-    fontSize: Dimensions.get('window').width * 0.06,
+    fontSize: Dimensions.get('window').width * 0.09,
     fontWeight: 'bold',
   }
 })

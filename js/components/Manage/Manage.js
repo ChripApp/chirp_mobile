@@ -134,13 +134,15 @@ export default class Manage extends Component {
                       >
                         <View>
                           <TouchableHighlight style={{alignItems: 'flex-end', justifyContent: 'center', backgroundColor: 'red', height: Dimensions.get('window').width * 0.45}}>
-                                  <Text style={{color: 'white', paddingRight: 5, fontSize: 35}}>Remove</Text>
+                            <Text style={{color: 'black', fontFamily: 'Arial', fontSize: 35, fontWeight: 'bold', paddingRight: 15,}}>
+                              Remove
+                            </Text>
                           </TouchableHighlight>
                         </View>
-                        <CustomerCell 
-                          backgroundColor={this.props.store.queue.indexOf(rowData) % 3 == 0 ? "#888888" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#333333" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#555555" : "#ffffff"}
-                          ref={"row" + this.props.store.queue.indexOf(rowData)} 
-                          data={rowData} 
+                        <CustomerCell
+                          backgroundColor={this.props.store.queue.indexOf(rowData) % 3 == 0 ? "#FFEF77" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#FFED66" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#FFEC56" : "#FFEC56"}
+                          ref={"row" + this.props.store.queue.indexOf(rowData)}
+                          data={rowData}
                           dequeue={this._handleRemoveCustomer}/>
                       </SwipeRow>
                     }
@@ -152,12 +154,14 @@ export default class Manage extends Component {
                   <ListView
                     dataSource={this.props.store && this.props.store.doneQueue ? new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.store.doneQueue) : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([])}
                     enableEmptySections={true}
-                    renderRow={(rowData) => 
-                        <CustomerCell 
-                          backgroundColor={this.props.store.queue.indexOf(rowData) % 3 == 0 ? "#888888" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#333333" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#555555" : "#ffffff"}
-                          noRemove={true} 
-                          data={rowData} 
-                          dequeue={this._handleRemoveCustomer} />}
+                    renderRow={(rowData) =>
+                      <CustomerCell
+                        backgroundColor={this.props.store.queue.indexOf(rowData) % 3 == 0 ? "#888888" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#333333" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#555555" : "#ffffff"}
+                        noRemove={true}
+                        data={rowData}
+                        dequeue={this._handleRemoveCustomer}
+                      />
+                    }
                   />
                 </View>): null}
           </View>
@@ -177,8 +181,8 @@ var styles = StyleSheet.create({
   },
   tabButtonText: {
     color: 'rgba(0,0,0,0.3)',
-    fontFamily: 'Helvetica Neue',
-    fontSize: 16,
+    fontFamily: 'Arial',
+    fontSize: 27,
     fontWeight: 'bold',
   },
   text: {

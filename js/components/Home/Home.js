@@ -120,27 +120,26 @@ export default class Home extends Component {
           <View style={styles.slide1}>
             <View style={{height: 20}}></View>
             <View style={{flex:1, alignItems: 'flex-end'}}>
-                <TouchableHighlight
-                    onPress={Actions.mode}
-                    underlayColor='transparent'
-                    style={{paddingRight: 15, paddingTop: 11}}
-                  >
-                    <Image
-                      source={require('../../../public/assets/img/crossIcon.png')}
-                      style={{width: 35, height: 35}}
-                    />
-                </TouchableHighlight>
+              <TouchableHighlight
+                  onPress={Actions.mode}
+                  underlayColor='transparent'
+                  style={{paddingRight: 15, paddingTop: 11}}
+                >
+                  <Image
+                    source={require('../../../public/assets/img/crossIcon.png')}
+                    style={{width: 35, height: 35}}
+                  />
+              </TouchableHighlight>
             </View>
             <View style={{flex: flexRatio - 1, paddingLeft: 15, paddingRight: 15}}>
-              <Text style={{color: 'white', fontFamily: 'Arial', fontWeight: 'bold', fontSize: Dimensions.get('window').width * 0.08}}>
+              <Text style={{color: 'white', fontFamily: 'Arial', fontWeight: 'bold', fontSize: Dimensions.get('window').width * 0.09}}>
                 {this.props.store ? this.props.store.name : null}
               </Text>
               <View style={{flex: 1, justifyContent: 'space-between'}}>
-
-                <Text style={{fontSize: Dimensions.get('window').width * 0.08}}>
+                <Text style={{fontSize: Dimensions.get('window').width * 0.19, fontWeight: 'bold', fontFamily: 'Arial'}}>
                   Groups Ahead {this.props.store ? this.props.store.queue.length : ""}
                 </Text>
-                <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: Dimensions.get('window').width * 0.08, color: 'rgba(0,0,0,0.3)'}}>
+                <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: Dimensions.get('window').width * 0.19, color: 'rgba(0,0,0,0.3)'}}>
                   {this.props.store ? estmin + ' Wait' : ""}
                 </Text>
               </View>
@@ -243,10 +242,10 @@ var styles = StyleSheet.create({
     // color: 'rgba(255,255,255,0.2)',
     // color: '#986B6C',
     // fontSize: 13,
-    // fontFamily: 'Helvetica Neue',
+    // fontFamily: 'Arial',
     // fontWeight: 'bold',
     color: 'rgba(0,0,0,0.3)',
-    fontFamily: 'Helvetica Neue',
+    fontFamily: 'Arial',
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -283,7 +282,7 @@ var styles = StyleSheet.create({
     // fontWeight: 'bold',
     backgroundColor: 'white',
     borderColor: 'black',
-    fontFamily: 'Helvetica Neue',
+    fontFamily: 'Arial',
     fontSize: 13,
     fontWeight: '200',
     height: 45,

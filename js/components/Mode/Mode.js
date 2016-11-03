@@ -28,7 +28,7 @@ export default class Profile extends Component {
   _handleCurrentPassword(text) {
     if(text.charAt(text.length - 1) == ' ')
       return;
-    
+
     this.props.updateProfilePassword(text);
   }
 
@@ -71,7 +71,7 @@ export default class Profile extends Component {
   }
 
   render() {
-{    
+{
     if(!this.props.verified)
       return (
       <View style={{flex: 1, padding: 45, justifyContent: 'center', alignItems: 'center'}}>
