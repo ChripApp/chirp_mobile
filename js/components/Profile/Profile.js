@@ -65,7 +65,7 @@ export default class Profile extends Component {
         ]
       );
       return;
-    }else if(this.props.estmin != undefined && isNan(this.props.estmin)){
+    }else if(this.props.estmin != undefined && isNaN(this.props.estmin)){
       Alert.alert(
         "Sorry",
         "Please enter number for the est minute",

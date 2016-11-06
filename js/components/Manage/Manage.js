@@ -123,8 +123,8 @@ export default class Manage extends Component {
               (<View style={styles.tabContainer}>
                   <SwipeListView
                     ref="waitlist"
-                    dataSource={this.props.store ? new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.store.queue) : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([])}
                     enableEmptySections={true}
+                    dataSource={this.props.store ? new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.store.queue) : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([])}
                     renderRow={
                       (rowData) =>
                       <SwipeRow
@@ -156,7 +156,7 @@ export default class Manage extends Component {
                     enableEmptySections={true}
                     renderRow={(rowData) =>
                       <CustomerCell
-                        backgroundColor={this.props.store.queue.indexOf(rowData) % 3 == 0 ? "#888888" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#333333" : this.props.store.queue.indexOf(rowData) % 3 == 1 ? "#555555" : "#ffffff"}
+                        backgroundColor={"#FFEF77"}
                         noRemove={true}
                         data={rowData}
                         dequeue={this._handleRemoveCustomer}
@@ -174,6 +174,9 @@ var styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#FFEC56',
     paddingTop: 15,
+  },
+  tabContainer: {
+    flex: 1
   },
   container: {
     backgroundColor: '#FFEC56',

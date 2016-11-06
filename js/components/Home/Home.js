@@ -111,10 +111,10 @@ export default class Home extends Component {
   render() {
     var estmin = '';
     if(this.props.store != undefined && this.props.store.estmin){
-      if(this.props.store.waiting == undefined)
-        estmin = "0" + " Min";
-      else
-        estmin = "" + (this.props.store.estmin * this.props.store.waiting) + " Min";
+      if(!(this.props.store.waiting == undefined || this.props.store.waiting == 0)){
+        estmin = "" + (this.props.store.estmin * this.props.store.waiting) + " Min Wait";
+      }
+        
     }
     return (
           <View style={styles.slide1}>
@@ -136,11 +136,11 @@ export default class Home extends Component {
                 {this.props.store ? this.props.store.name : null}
               </Text>
               <View style={{flex: 1, justifyContent: 'space-between'}}>
-                <Text style={{fontSize: Dimensions.get('window').width * 0.19, fontWeight: 'bold', fontFamily: 'Arial'}}>
-                  Groups Ahead {this.props.store ? this.props.store.queue.length : ""}
+                <Text style={{fontSize: Dimensions.get('window').width * 0.15, fontWeight: 'bold', fontFamily: 'Arial'}}>
+                  Parties Ahead {this.props.store ? this.props.store.queue.length : ""}
                 </Text>
-                <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: Dimensions.get('window').width * 0.19, color: 'rgba(0,0,0,0.3)'}}>
-                  {this.props.store ? estmin + ' Wait' : ""}
+                <Text style={{fontFamily: 'Arial', fontWeight: 'bold', fontSize: Dimensions.get('window').width * 0.15, color: 'rgba(0,0,0,0.3)'}}>
+                  {this.props.store ? estmin : ""}
                 </Text>
               </View>
               <View style={{flex: 4, justifyContent: 'flex-end'}}>
